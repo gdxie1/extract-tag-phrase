@@ -1,5 +1,6 @@
+# coding=utf-8
 # chcp 65001
-
+import codecs
 import argparse
 from phrase_extraction import phrase_extraction
 from alignment import get_alignments, do_alignment
@@ -10,7 +11,7 @@ def get_giza_file_content(file_name):
             for i in range(0, len(file_content), 3)]
 
 def get_data_from_file(file_name):
-    with open(file_name, encoding="utf-8") as file_:
+    with codecs.open(file_name, encoding="utf-8") as file_:
         content = [ line.lower().strip() for line in file_ ]
     return content
 
@@ -42,13 +43,18 @@ if __name__ == '__main__':
 
     for fe_phrase, ef_phrase in zip(fe_phrases, ef_phrases):
         fe_alignment, ef_alignment = get_alignments(fe_phrase, ef_phrase)
-
+        # 例如fe_alignment=(1, 2) 这里 2是f 1是e
+        # 原来的由问题，source 和traget混淆了
+        # alignment = do_alignment(fe_alignment, ef_alignment,
+                                 # len(fe_phrase[0]), len(ef_phrase[0]))
         alignment = do_alignment(fe_alignment, ef_alignment,
-                                 len(fe_phrase[0]), len(ef_phrase[0]))
+                                 len(ef_phrase[0]), len(fe_phrase[0]))
         print(alignment)
-
-
-        BP = phrase_extraction(fe_phrase[0], ef_phrase[0], alignment)
+        # import pdb; pdb.set_trace()
+        
+        BP = phrase_extraction(ef_phrase[0], fe_phrase[0], alignment)  # fe_phrase[0] 是 e 句子
+        # 修改错误
+        #BP = phrase_extraction(ef_phrase[0],fe_phrase[0], alignment)
 
         for (pl_phrase, pt_phrase) in BP:
             print(pl_phrase, "<=>", pt_phrase)

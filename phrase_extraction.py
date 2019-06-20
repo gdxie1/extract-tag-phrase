@@ -4,7 +4,7 @@ def phrase_extraction(f_sentence, e_sentence, alignment):
     for e_start in range(1, len(e_sentence) + 1):
         for e_end in range(e_start, len(e_sentence) + 1):
             f_start, f_end = len(f_sentence), 0
-            for (e, f) in A:
+            for (f, e) in A:
                 e, f = int(e), int(f)
                 if e_start <= e <= e_end:
                     f_start = min(f, f_start)
