@@ -60,17 +60,18 @@ if __name__ == '__main__':
     fe_phrases = get_giza_file_content(args.fe_file)
     ef_phrases = get_giza_file_content(args.ef_file)
 
-    # # with open('phrase_table/phrase_prob_list.pkl', 'rb') as f:
-    # with open(args.phrase_p, 'rb') as f:
-    #     phrase_dict = pickle.load(f)
-    phrase_dict = {}
-    line_id = 0
-    with codecs.open(args.phrase_p, mode='r', encoding="utf-8") as f:
-        for line in f:
-            ph_f, ph_e, prob = line.split('|')
-            phrase_dict[(ph_f, ph_e)] = float(prob)
-            print(line_id)
-            line_id += 1
+    # with open('phrase_table/phrase_prob_list.pkl', 'rb') as f:
+    with open(args.phrase_p, 'rb') as f:
+        phrase_dict = pickle.load(f)
+
+    # phrase_dict = {}
+    # line_id = 0
+    # with codecs.open(args.phrase_p, mode='r', encoding="utf-8") as f:
+    #     for line in f:
+    #         ph_f, ph_e, prob = line.split('|')
+    #         phrase_dict[(ph_f, ph_e)] = float(prob)
+    #         print(line_id)
+    #         line_id += 1
 
     print('phrase table loaded')
     senid = 0

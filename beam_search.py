@@ -104,7 +104,7 @@ def search(sen_e, sen_f, BP, BP_pos, e_start_dict, phrase_dict):
     last_beam = started_beam
     # while 1:
     for i in range(1000):
-        print('beam %d' % i)
+        # print('beam %d' % i)
         new_beam = Beam(beam_size)
         for j, last_hyp in enumerate(last_beam):
             # print('last hyp %d' % j)
