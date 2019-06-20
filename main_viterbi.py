@@ -88,30 +88,31 @@ if __name__ == '__main__':
         # ef_phrase = ef_phrases[id]
         BP, BP_pos = phrase_extraction(fe_phrase[0], ef_phrase[0], alignment)  # fe_phrase[0] 是 e 句子
 
-        # find each e_start and its count
-        phrase_start_pos_counter = Counter()
-        for idx, ((e_start, e_end), (f_start, f_end)) in enumerate(BP_pos):
-            phrase_start_pos_counter[e_start] += 1
-        e_start_list = phrase_start_pos_counter.items()
-        accumulated = 0
-        # in order to speed search, for a pos in sentence, build a dict to index the start-index and end-index in BP_pos
-        # in order to speed search, for a pos in sentence, build a dict to index the start-index and end-index in BP_pos
+        # # find each e_start and its count
+        # phrase_start_pos_counter = Counter()
+        # for idx, ((e_start, e_end), (f_start, f_end)) in enumerate(BP_pos):
+        #     phrase_start_pos_counter[e_start] += 1
+        # e_start_list = phrase_start_pos_counter.items()
+        # accumulated = 0
+        # # in order to speed search, for a pos in sentence, build a dict to index the start-index and end-index in BP_pos
         e_start_dict = {}
-        for e_start, count in e_start_list:
-            e_start_dict[e_start] = (accumulated, accumulated + count)
-            accumulated += count
-        #                                        necessory information to continue the search
-        #  phrase, score, e_start, sen_e, sen_f, BP, BP_pos, e_start_dict, phrase_dict, backpointer = None
-        # start_hyp = beam_search.Hypothesis(None, None, -1, BP, BP_pos, e_start_dict, phrase_dict, backpointer=None)
+        # for e_start, count in e_start_list:
+        #     e_start_dict[e_start] = (accumulated, accumulated + count)
+        #     accumulated += count
+        for idx, ((e_start, e_end), (f_start, f_end)) in enumerate(BP_pos):
+            e_pos_list = e_start_dict.get(e_start, [])
+            e_pos_list.append(idx)
+            e_start_dict[e_start] = e_pos_list
+
         phrase_seg = beam_search.search(fe_phrase[0], ef_phrase[0], BP, BP_pos, e_start_dict, phrase_dict)
         phrase_result.append(phrase_seg)
         senid+=1
     with codecs.open('phrase.en', 'w', encoding='utf-8') as f_e:
         with codecs.open('phrase.zh', 'w', encoding='utf-8') as f_f:
-            for phrase_seg in phrase_result:
+            for phrase_seg in phrase_result:  # each sentence
                 f_seg = ''
                 e_seg = ''
-                for ph_f, ph_e in phrase_seg:
+                for (ph_f, ph_e), _ in phrase_seg:  # each sentence's phrase list
                     f_seg += ph_f
                     f_seg += ' | '
                     e_seg += ph_e

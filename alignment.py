@@ -7,25 +7,52 @@ def get_phrase_split(phrase):
     phrase_splitted = re.split("(\S+ \(\{[0-9 ]*\}\))", phrase)
     phrase_splitted = [ item.strip() for item in phrase_splitted \
                         if item != " " and item != "" ]
-    phrase_splitted = [ re.match(r"(\S+) (\(\{[0-9 ]*\}\))", item) \
-                          .group(1, 2) for item in phrase_splitted ]
+    # phrase_splitted = [ re.match(r"(\S+) (\(\{[0-9 ]*\}\))", item) \
+    #                       .group(1, 2) for item in phrase_splitted ]
+
+    new_list = []
+    for i, item in enumerate(phrase_splitted):
+        # print(i)
+        # print(item)
+        tt = re.match(r"(\S+) (\(\{[0-9 ]*\}\))", item).group(1, 2)
+        new_list.append(tt)
+    phrase_splitted = new_list
+
     phrase_splitted = [ (item[0], int(s)) for item in phrase_splitted \
                         for s in item[1].strip("{()}").split() ]
     return phrase_splitted
 
 def get_alignments(fe_phrase, ef_phrase):
     fe_phrase_splitted = get_phrase_split(fe_phrase[1])
-    fe_alignment = [ (y, ef_phrase[0].index(x)+1) for (x, y) in  fe_phrase_splitted ]
+    fe_alignment = []
+    for x, y in fe_phrase_splitted:
+        if x == u'null':  # 忽略 null
+            continue
+        fe_alignment.append((y, ef_phrase[0].index(x)+1))
+        #fe_alignment = [(y, ef_phrase[0].index(x) + 1) for (x, y) in fe_phrase_splitted]
 
+    ef_alignment = []
     ef_phrase_splitted = get_phrase_split(ef_phrase[1])
-    ef_alignment = [ (y, fe_phrase[0].index(x)+1) for (x, y) in  ef_phrase_splitted ]
+    for x, y in ef_phrase_splitted:
+        if x == u'null':  # 忽略 null
+            continue
+        ef_alignment.append((y, fe_phrase[0].index(x) + 1))
+        #ef_alignment = [(y, fe_phrase[0].index(x) + 1) for (x, y) in ef_phrase_splitted]
+
+
+
+    # fe_phrase_splitted = get_phrase_split(fe_phrase[1])
+    # fe_alignment = [ (y, ef_phrase[0].index(x)+1) for (x, y) in  fe_phrase_splitted ]
+    #
+    # ef_phrase_splitted = get_phrase_split(ef_phrase[1])
+    #ef_alignment = [ (y, fe_phrase[0].index(x)+1) for (x, y) in  ef_phrase_splitted ]
 
     return fe_alignment, ef_alignment
 
 def grow_diag(alignment, fe_len, ef_len, aligned, union):
     neighbours = [ (-1,0), (0,-1), (1,0), (0,1), (-1,-1), (-1,1), (1,-1), (1,1) ]  # up down left right up-left up-right ...
     prev_len = len(alignment) - 1
-    
+    # aligned 中存储的是 intersected 位置
     # repeat until new points appear
     #while prev_len < len(alignment):
     flag = True
