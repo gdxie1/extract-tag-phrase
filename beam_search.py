@@ -40,10 +40,12 @@ class Hypothesis:
         self.e_start_dict = e_start_dict
         self.backpointer = backpointer
         if backpointer:
+            self.ori_score_list = backpointer.ori_score_list + [score]  # you can't use append as append will return a null
             self.phrase_count = backpointer.phrase_count+1
             # normalized the score with length of the hyp
             self.score = (backpointer.phrase_count*backpointer.score+score)/self.phrase_count
         else:
+            self.ori_score_list = [0]
             self.phrase_count = 0
             self.score = 0
         # self.phrase_dict = phrase_dict

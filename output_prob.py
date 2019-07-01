@@ -75,53 +75,19 @@ if __name__ == '__main__':
 
     print('phrase table loaded')
     senid = 0
-    phrase_result = []  # segment result
+
+    small_phrase_dict = {}
     for fe_phrase, ef_phrase in zip(fe_phrases, ef_phrases):
         print(senid)
-        # stopline = 1899
-        # if senid != stopline:
-        #     continue
-            # senid = stopline
         fe_alignment, ef_alignment = get_alignments(fe_phrase, ef_phrase)
         alignment = do_alignment(fe_alignment, ef_alignment,
                                  len(ef_phrase[0]), len(fe_phrase[0]))
-        # fe_phrase = fe_phrases[id]
-        # ef_phrase = ef_phrases[id]
         BP, BP_pos = phrase_extraction(fe_phrase[0], ef_phrase[0], alignment)  # fe_phrase[0] 是 e 句子
 
-        # # find each e_start and its count
-        # phrase_start_pos_counter = Counter()
-        # for idx, ((e_start, e_end), (f_start, f_end)) in enumerate(BP_pos):
-        #     phrase_start_pos_counter[e_start] += 1
-        # e_start_list = phrase_start_pos_counter.items()
-        # accumulated = 0
-        # # in order to speed search, for a pos in sentence, build a dict to index the start-index and end-index in BP_pos
-        e_start_dict = {}
-        # for e_start, count in e_start_list:
-        #     e_start_dict[e_start] = (accumulated, accumulated + count)
-        #     accumulated += count
-        for idx, ((e_start, e_end), (f_start, f_end)) in enumerate(BP_pos):
-            e_pos_list = e_start_dict.get(e_start, [])
-            e_pos_list.append(idx)
-            e_start_dict[e_start] = e_pos_list
+        for ph in BP:
+            small_phrase_dict[ph] = phrase_dict.get(ph, 0.000000001)
+            print('%r   %f' % (ph, small_phrase_dict[ph]))
 
-        phrase_seg = beam_search.search(fe_phrase[0], ef_phrase[0], BP, BP_pos, e_start_dict, phrase_dict)
-        phrase_result.append(phrase_seg)
-        senid+=1
-    with codecs.open('phrase.en', 'w', encoding='utf-8') as f_e:
-        with codecs.open('phrase.zh', 'w', encoding='utf-8') as f_f:
-            for phrase_seg in phrase_result:  # each sentence
-                f_seg = ''
-                e_seg = ''
-                for (ph_f, ph_e), _ in phrase_seg:  # each sentence's phrase list
-                    f_seg += ph_f
-                    f_seg += ' | '
-                    e_seg += ph_e
-                    e_seg += ' | '
-                f_e.write(e_seg)
-                f_e.write('\n')
-                f_f.write(f_seg)
-                f_f.write('\n')
-    with open('phrase.dat', 'wb') as f:
-        pickle.dump(phrase_result, f)
+    with open('small_phrase_prob.pkl', 'wb') as f:
+        pickle.dump(small_phrase_dict, f)
 
