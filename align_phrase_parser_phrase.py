@@ -68,7 +68,8 @@ if __name__ == '__main__':
     parser.add_argument("fe_file", type=str)
     parser.add_argument("ef_file", type=str)
 
-    #parser.add_argument("seg_model_path", type=str)
+    parser.add_argument("f_output", type=str)
+    parser.add_argument("e_output", type=str)
     #parser.add_argument("parser_model_path", type=str)
 
     args = parser.parse_args()
@@ -85,8 +86,13 @@ if __name__ == '__main__':
                   'DNP', 'DP', 'DVP', 'FRAG', 'IP', 'LCP',
                   'LST', 'NP', 'PP', 'PRN', 'QP', 'UCP', 'VP']
 
-    phrase_result = []  # segment result
     labled_phrase_number = 2  # each sentence has about 2 phrase labeled
+    file_f = codecs.open(args.f_output, mode='w', encoding="utf-8")
+    file_e = codecs.open(args.e_output, mode='w', encoding="utf-8")
+    tagged_phrase_result = []  # tagged phrases for all corpus
+    # to do some statistic for future
+    sen_and_tagged_phrases = []
+
     for fe_phrase, ef_phrase in zip(fe_phrases, ef_phrases):
         print(senid)
         # stopline = 1899
@@ -112,39 +118,97 @@ if __name__ == '__main__':
             traverse(one_tree, p_phrase_dict, phrase_tag)
 
         # Get all phrase
-        p_phrase_list = []
+        p_phrase_list = []  # (phrase, tags like np vp etc)
         for key in p_phrase_dict:
             for subtree in p_phrase_dict[key]:
-                p_phrase_list.append(' '.join(subtree.leaves()))
+                p_phrase_list.append((' '.join(subtree.leaves()), key))
 
+        # to select some phrases randomly
         if labled_phrase_number < len(p_phrase_list):
             ph_index = random.sample(range(len(p_phrase_list)), labled_phrase_number)
         else:
             ph_index = random.sample(range(len(p_phrase_list)), int(len(p_phrase_list)/2+0.5))  # at lease there is one
         #align_ph_f = zip(*BP)[0]
-        to_be_labeled = []
+        to_be_labeled = [] # (id in BP, tag type like NP BP etc)
         for idx in ph_index:
             for pair_i, ph_pair in enumerate(BP):
-                if p_phrase_list[idx] == ph_pair[0]:
-                    to_be_labeled.append(pair_i)
+                if p_phrase_list[idx][0] == ph_pair[0]:
+                    to_be_labeled.append((pair_i, p_phrase_list[idx][1]))
 
-        filtered_to_be_labled = []
+        filtered_to_be_labled = []  # (phrase id in BP, tags like np vp etc)
         # check if there is overlaps
-        for idx in to_be_labeled:
+        for BP_idx, ph_tag in to_be_labeled:
             overlap_flag = False
-            f_start, f_end = BP_pos[idx][0]
-            for idx_fi in filtered_to_be_labled:
+            f_start, f_end = BP_pos[BP_idx][0]
+            for idx_fi, _ in filtered_to_be_labled:
                 f_start_fi, f_end_fi = BP_pos[idx_fi][0]
-                # 起始点 或结束点在另外一个 phrase内部
-                if (f_start >= f_start_fi and f_start < f_end_fi) or (f_end >= f_start_fi and f_end < f_end_fi):
+                # 起始点 或结束点在另外一个 phrase内部 ,有以下几种情况，都有考虑
+                #  [        ]
+                #   [    ]   被比较的短语
+                #     [ ]
+                #     [   ]
+                # [   ]
+                if (f_start >= f_start_fi and f_start < f_end_fi) or \
+                        (f_end-1 >= f_start_fi and f_end-1 < f_end_fi) or \
+                        (f_start <= f_start_fi and f_end >= f_end_fi):
                     overlap_flag = True
                     break
             if not overlap_flag:
-                filtered_to_be_labled.append(idx)
-        for idx in filtered_to_be_labled:
-            print('<%s   %s>' % BP[idx], end='')
-        print('\n')
+                filtered_to_be_labled.append((BP_idx,ph_tag))
 
+        tagged_phrase_result.append(filtered_to_be_labled)
+        sen_and_tagged_phrases.append((len(ef_phrase[0]), len(fe_phrase[0]), len(filtered_to_be_labled)))
+        # imbue the tag into the corpus
+        # if insertted new item, the index following item will change, we must convert each word item into list
+        f_wordlist_list = [[word] for word in ef_phrase[0]]
+        e_wordlist_list = [[word] for word in fe_phrase[0]]
+        for BP_idx, ph_tag in filtered_to_be_labled:
+            f_st, f_end = BP_pos[BP_idx][0]
+            e_st, e_end = BP_pos[BP_idx][1]
+            f_wordlist_list[f_st].insert(0, '<'+ph_tag)  # insert the <tag
+            f_wordlist_list[f_end-1].append('>')           # insert the >
+            e_wordlist_list[e_st].insert(0, '<'+ph_tag)  # insert the <tag
+            e_wordlist_list[e_end-1].append('>')           # insert the >
+
+        f_wordlist = []
+        e_wordlist = []
+        for words in f_wordlist_list:
+            f_wordlist.extend(words)
+        for words in e_wordlist_list:
+            e_wordlist.extend(words)
+        print(len(filtered_to_be_labled))
+        print(' '.join(f_wordlist))
+        print(' '.join(e_wordlist))
+        file_f.write(' '.join(f_wordlist))
+        file_f.write('\n')
+        file_e.write(' '.join(e_wordlist))
+        file_e.write('\n')
+        # for BP_idx, ph_tag in filtered_to_be_labled:
+        #     print('<%s %s   %s>' % (ph_tag, BP[BP_idx][0], BP[BP_idx][1], ), end='')
+        # print('\n')
+        senid+=1
+
+    with open('tag_phrase.pkl', 'wb') as f:
+        pickle.dump(tagged_phrase_result, f)
+    with open('sen_tag_phrase_info.pkl', 'wb') as f:
+        pickle.dump(sen_and_tagged_phrases, f)
+
+    ph_cn = None
+    for ph_cn in zip(*sen_and_tagged_phrases):
+        pass
+    total_tagged_phrase = sum(ph_cn)
+    ave_tagged = float(total_tagged_phrase)/len(sen_and_tagged_phrases)
+    print('total tagged phrases:%d' % total_tagged_phrase)
+    print('total sentences:%d' % len(sen_and_tagged_phrases))
+    print('average tagged phrase:%f' % ave_tagged)
+    print('tags count:%d' % len(phrase_tag))
+    print('tags:%r' % phrase_tag)
+    with codecs.open('tagged_info.txt', mode='w', encoding="utf-8") as f:
+        f.write('total tagged phrases:%d\n' % total_tagged_phrase)
+        f.write('total sentences:%d\n' % len(sen_and_tagged_phrases))
+        f.write('average tagged phrase:%f\n' % ave_tagged)
+        f.write('tags count:%d\n' % len(phrase_tag))
+        f.write('tags:%r\n' % phrase_tag)
 
 # ADJP adjective phrase
 # ADVP adverbial phrase headed by AD (adverb)
@@ -167,22 +231,4 @@ if __name__ == '__main__':
         #list(parser.raw_parse("the quick brown fox jumps over the lazy dog"))
         # [Tree('ROOT', [Tree('NP', [Tree('NP', [Tree('DT', ['the']), Tree('JJ', ['quick']), Tree('JJ', ['brown']), Tree('NN', ['fox'])]), Tree('NP', [Tree('NP', [Tree('NNS', ['jumps'])]), Tree('PP', [Tree('IN', ['over']), Tree('NP', [Tree('DT', ['the']), Tree('JJ', ['lazy']), Tree('NN', ['dog'])])])])])])]
         # phrase_result.append(phrase_seg)
-        senid+=1
-
-    # with codecs.open('phrase.en', 'w', encoding='utf-8') as f_e:
-    #     with codecs.open('phrase.zh', 'w', encoding='utf-8') as f_f:
-    #         for phrase_seg in phrase_result:  # each sentence
-    #             f_seg = ''
-    #             e_seg = ''
-    #             for (ph_f, ph_e), _ in phrase_seg:  # each sentence's phrase list
-    #                 f_seg += ph_f
-    #                 f_seg += ' | '
-    #                 e_seg += ph_e
-    #                 e_seg += ' | '
-    #             f_e.write(e_seg)
-    #             f_e.write('\n')
-    #             f_f.write(f_seg)
-    #             f_f.write('\n')
-    # with open('phrase.dat', 'wb') as f:
-    #     pickle.dump(phrase_result, f)
 
