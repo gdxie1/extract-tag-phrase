@@ -176,9 +176,9 @@ if __name__ == '__main__':
             f_wordlist.extend(words)
         for words in e_wordlist_list:
             e_wordlist.extend(words)
-        print(len(filtered_to_be_labled))
-        print(' '.join(f_wordlist))
-        print(' '.join(e_wordlist))
+        # print(len(filtered_to_be_labled))
+        # print(' '.join(f_wordlist))
+        # print(' '.join(e_wordlist))
         file_f.write(' '.join(f_wordlist))
         file_f.write('\n')
         file_e.write(' '.join(e_wordlist))
