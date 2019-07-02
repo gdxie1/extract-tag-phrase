@@ -22,7 +22,7 @@ if __name__ == '__main__':
     parser = CoreNLPParser(url='http://localhost:9001')
     print('parser generated!')
 
-    file_f = codecs.open(args.f_output, mode='w', encoding="utf-8")
+    file_f = codecs.open(args.f_file, encoding="utf-8")
     for f_sen in file_f:
         p_parse_trees = list(parser.parse(parser.tokenize(f_sen)))
         print(p_parse_trees[0])
