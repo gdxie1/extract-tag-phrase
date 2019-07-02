@@ -11,8 +11,6 @@ from alignment import get_alignments, do_alignment
 from nltk.parse import CoreNLPParser
 from nltk.tree import Tree
 
-from nltk.tag.stanford import StanfordPOSTagger
-
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument("f_file", type=str)
@@ -24,5 +22,9 @@ if __name__ == '__main__':
 
     file_f = codecs.open(args.f_file, encoding="utf-8")
     for f_sen in file_f:
-        p_parse_trees = list(parser.parse(parser.tokenize(f_sen)))
+        try:
+            p_parse_trees = list(parser.parse(parser.tokenize(f_sen)))
+        except ValueError:
+            print('error line')
+            continue
         print(p_parse_trees[0])
