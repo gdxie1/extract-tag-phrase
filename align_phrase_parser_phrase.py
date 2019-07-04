@@ -70,6 +70,9 @@ if __name__ == '__main__':
 
     parser.add_argument("f_output", type=str)
     parser.add_argument("e_output", type=str)
+
+    parser.add_argument('start_line', type=int, default=0)
+    parser.add_argument('end_line', type=int, default=-1)  # -1 represents ends
     #parser.add_argument("parser_model_path", type=str)
 
     args = parser.parse_args()
@@ -92,9 +95,16 @@ if __name__ == '__main__':
     tagged_phrase_result = []  # tagged phrases for all corpus
     # to do some statistic for future
     sen_and_tagged_phrases = []
-
+    exception_sen = []
     for fe_phrase, ef_phrase in zip(fe_phrases, ef_phrases):
         print(senid)
+        if senid < args.start_line:
+            senid += 1
+            continue
+        if senid >= args.end_line and args.end_line != -1:
+            break
+
+        senid += 1
         # stopline = 1899
         # if senid != stopline:
         #     continue
@@ -106,8 +116,15 @@ if __name__ == '__main__':
         # ef_phrase = ef_phrases[id]
         BP, BP_pos = phrase_extraction(fe_phrase[0], ef_phrase[0], alignment)  # fe_phrase[0] 是 e 句子
         f_sen = ' '.join(ef_phrase[0])
-        p_parse_trees = list(parser.parse(parser.tokenize(f_sen)))
-        
+
+        p_phrase_trees = None
+        try:
+            p_parse_trees = list(parser.parse(parser.tokenize(f_sen)))
+        except ValueError:
+            print('parsing fail')
+            exception_sen.append(senid)
+            p_parse_trees = [Tree.fromstring('(S (NULL ERROR))')]  # we simply give a dummy tree
+
         # create a dict to keep all phrase in different categories
         p_phrase_dict = {} 
         for tag in phrase_tag:
@@ -156,7 +173,7 @@ if __name__ == '__main__':
             if not overlap_flag:
                 filtered_to_be_labled.append((BP_idx,ph_tag))
 
-        tagged_phrase_result.append(filtered_to_be_labled)
+        tagged_phrase_result.append(filtered_to_be_labled)  # keep each line's tagged phrase to a list in order to output
         sen_and_tagged_phrases.append((len(ef_phrase[0]), len(fe_phrase[0]), len(filtered_to_be_labled)))
         # imbue the tag into the corpus
         # if insertted new item, the index following item will change, we must convert each word item into list
@@ -186,7 +203,7 @@ if __name__ == '__main__':
         # for BP_idx, ph_tag in filtered_to_be_labled:
         #     print('<%s %s   %s>' % (ph_tag, BP[BP_idx][0], BP[BP_idx][1], ), end='')
         # print('\n')
-        senid+=1
+
 
     with open('tag_phrase.pkl', 'wb') as f:
         pickle.dump(tagged_phrase_result, f)
@@ -203,12 +220,15 @@ if __name__ == '__main__':
     print('average tagged phrase:%f' % ave_tagged)
     print('tags count:%d' % len(phrase_tag))
     print('tags:%r' % phrase_tag)
+    print('exception sen:%r' % exception_sen)
     with codecs.open('tagged_info.txt', mode='w', encoding="utf-8") as f:
         f.write('total tagged phrases:%d\n' % total_tagged_phrase)
         f.write('total sentences:%d\n' % len(sen_and_tagged_phrases))
         f.write('average tagged phrase:%f\n' % ave_tagged)
         f.write('tags count:%d\n' % len(phrase_tag))
         f.write('tags:%r\n' % phrase_tag)
+        f.write('exception sen:%r\n' % exception_sen)
+
 
 # ADJP adjective phrase
 # ADVP adverbial phrase headed by AD (adverb)
