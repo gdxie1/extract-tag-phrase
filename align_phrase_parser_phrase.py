@@ -100,6 +100,7 @@ if __name__ == '__main__':
         print(senid)
         if senid < args.start_line:
             senid += 1
+            print("skipped")
             continue
         if senid >= args.end_line and args.end_line != -1:
             break
