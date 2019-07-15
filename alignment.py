@@ -26,7 +26,7 @@ def get_alignments(fe_phrase, ef_phrase):
     fe_phrase_splitted = get_phrase_split(fe_phrase[1])
     fe_alignment = []
     for x, y in fe_phrase_splitted:
-        if x == u'null':  # 忽略 null
+        if x == u'null' or x == u'NULL':  # 忽略 null
             continue
         fe_alignment.append((y, ef_phrase[0].index(x)+1))
         #fe_alignment = [(y, ef_phrase[0].index(x) + 1) for (x, y) in fe_phrase_splitted]
@@ -34,7 +34,7 @@ def get_alignments(fe_phrase, ef_phrase):
     ef_alignment = []
     ef_phrase_splitted = get_phrase_split(ef_phrase[1])
     for x, y in ef_phrase_splitted:
-        if x == u'null':  # 忽略 null
+        if x == 'null'or x == 'Null' or x == 'NULL':  # 忽略 null
             continue
         ef_alignment.append((y, fe_phrase[0].index(x) + 1))
         #ef_alignment = [(y, fe_phrase[0].index(x) + 1) for (x, y) in ef_phrase_splitted]
