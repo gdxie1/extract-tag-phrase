@@ -91,18 +91,21 @@ if __name__ == '__main__':
                   'DNP', 'DP', 'DVP', 'FRAG', 'IP', 'LCP',
                   'LST', 'NP', 'PP', 'PRN', 'QP', 'UCP', 'VP']
 
-    labled_phrase_number = 2  # each sentence has about 2 phrase labeled
+    labled_phrase_number = 5  # each sentence has about 2 phrase labeled
     tagged_phrase_result = []  # tagged phrases for all corpus
     # to do some statistic for future
     sen_and_tagged_phrases = []
     exception_sen = []
     fe_ef_phrases = list(zip(fe_phrases, ef_phrases))
-    file_f = [open(args.f_output+str(id4), mode='w', encoding="utf-8") for id4 in range(4)]
-    file_e = [open(args.e_output+str(id4), mode='w', encoding="utf-8") for id4 in range(4)]
+    file_f = open(args.f_output, mode='w', encoding="utf-8")
+    file_e_list = [open(args.e_output+str(id4), mode='w', encoding="utf-8") for id4 in range(4)]
 
     for senid, f_sen in enumerate(f_line):
         print(senid)
-
+        # stopline = 10
+        # if senid == stopline:
+        #     break
+        #     # senid = stopline
         if senid < args.start_line:
             senid += 1
             print("skipped")
@@ -138,17 +141,19 @@ if __name__ == '__main__':
             ph_index = random.sample(range(len(p_phrase_list)), labled_phrase_number)
         else:
             ph_index = random.sample(range(len(p_phrase_list)), int(len(p_phrase_list)/2+0.5))  # at lease there is one
+        to_be_labeled_list = []
+        BP_list = []
+        BP_pos_list = []
+        fe_phrase_list = []
+        ef_phrase_list = []
+        filtered_to_be_labeled_list = []  # (phrase id in BP, tags like np vp etc)
 
         for id4 in range(4):
-
             fe_phrase, ef_phrase = fe_ef_phrases[id4*len(f_line) + senid]
             # assert f_sen == ef_phrase[0]
             if f_sen != ef_phrase[0]:
                 print(senid, 'not equal')
-            # stopline = 1899
-            # if senid != stopline:
-            #     continue
-                # senid = stopline
+
             fe_alignment, ef_alignment = get_alignments(fe_phrase, ef_phrase)
             alignment = do_alignment(fe_alignment, ef_alignment,
                                      len(ef_phrase[0]), len(fe_phrase[0]))
@@ -183,42 +188,79 @@ if __name__ == '__main__':
                 if not overlap_flag:
                     filtered_to_be_labled.append((BP_idx, ph_tag))
 
-            tagged_phrase_result.append(filtered_to_be_labled)  # keep each line's tagged phrase to a list in order to output
-            sen_and_tagged_phrases.append((len(ef_phrase[0]), len(fe_phrase[0]), len(filtered_to_be_labled)))
-            # imbue the tag into the corpus
-            # if insertted new item, the index following item will change, we must convert each word item into list
-            f_wordlist_list = [[word] for word in ef_phrase[0]]
-            e_wordlist_list = [[word] for word in fe_phrase[0]]
-            for BP_idx, ph_tag in filtered_to_be_labled:
-                f_st, f_end = BP_pos[BP_idx][0]
+            BP_list.append(BP)
+            BP_pos_list.append(BP_pos)
+            fe_phrase_list.append(fe_phrase)
+            ef_phrase_list.append(ef_phrase)
+            filtered_to_be_labeled_list.append(filtered_to_be_labled)
+        f_ph_filted_dict = [{} for _ in range(4)]
+        for id4 in range(4):
+            for BP_idx, ph_tag in filtered_to_be_labeled_list[id4]:
+                f_ph_filted_dict[id4][BP_pos_list[id4][BP_idx][0]] = (BP_idx, ph_tag)
+
+        filtered_key = f_ph_filted_dict[0].keys() & f_ph_filted_dict[1].keys() & f_ph_filted_dict[2].keys() & f_ph_filted_dict[3].keys()
+
+        tagged_phrase_result.append(filtered_key )  # keep each line's tagged phrase to a list in order to output
+        sen_and_tagged_phrases.append((len(fe_phrase_list[0][0]), len(ef_phrase_list[0][0]), len(filtered_key)))
+
+
+        # imbue the tag into the corpus
+        # if insertted new item, the index following item will change, we must convert each word item into list
+        f_wordlist_list = [[word] for word in ef_phrase_list[0][0]]
+
+        for k in filtered_key:
+            BP_idx, ph_tag = f_ph_filted_dict[0][k]
+            f_st, f_end = BP_pos_list[0][BP_idx][0]
+            f_wordlist_list[f_st].insert(0, '<'+ph_tag)  # insert the <tag
+            f_wordlist_list[f_end-1].append('>')           # insert the >
+
+        e_sen_wordlist_output = []
+        for ide in range(4):
+            BP_pos = BP_pos_list[ide]
+            e_wordlist_list = [[word] for word in fe_phrase_list[ide][0]]
+            for k in filtered_key:
+                BP_idx, ph_tag = f_ph_filted_dict[ide][k]
                 e_st, e_end = BP_pos[BP_idx][1]
-                f_wordlist_list[f_st].insert(0, '<'+ph_tag)  # insert the <tag
-                f_wordlist_list[f_end-1].append('>')           # insert the >
                 e_wordlist_list[e_st].insert(0, '<'+ph_tag)  # insert the <tag
                 e_wordlist_list[e_end-1].append('>')           # insert the >
+            e_sen_wordlist_output.append(e_wordlist_list)
+        #
+        # for BP_idx, ph_tag in filtered_to_be_labled:
+        #     f_st, f_end = BP_pos[BP_idx][0]
+        #     e_st, e_end = BP_pos[BP_idx][1]
+        #     f_wordlist_list[f_st].insert(0, '<'+ph_tag)  # insert the <tag
+        #     f_wordlist_list[f_end-1].append('>')           # insert the >
+        #     e_wordlist_list[e_st].insert(0, '<'+ph_tag)  # insert the <tag
+        #     e_wordlist_list[e_end-1].append('>')           # insert the >
 
-            f_wordlist = []
-            e_wordlist = []
-            for words in f_wordlist_list:
-                f_wordlist.extend(words)
-            for words in e_wordlist_list:
-                e_wordlist.extend(words)
-            # print(len(filtered_to_be_labled))
-            # print(' '.join(f_wordlist))
-            # print(' '.join(e_wordlist))
-            file_f[id4].write(' '.join(f_wordlist))
-            file_f[id4].write('\n')
-            file_e[id4].write(' '.join(e_wordlist))
-            file_e[id4].write('\n')
-            # for BP_idx, ph_tag in filtered_to_be_labled:
-            #     print('<%s %s   %s>' % (ph_tag, BP[BP_idx][0], BP[BP_idx][1], ), end='')
-            # print('\n')
+        f_wordlist = []
+        for words in f_wordlist_list:
+            f_wordlist.extend(words)
+
+        e_sen_wordlist = []
+        for ide in range(4):
+            for e_wordlist_list in e_sen_wordlist_output:
+                e_wordlist = []
+                for words in e_wordlist_list:
+                    e_wordlist.extend(words)
+                e_sen_wordlist.append(e_wordlist)
+        # print(len(filtered_to_be_labled))
+        # print(' '.join(f_wordlist))
+        # print(' '.join(e_wordlist))
+        file_f.write(' '.join(f_wordlist))
+        file_f.write('\n')
+        for id4 in range(4):
+            file_e_list[id4].write(' '.join(e_sen_wordlist[id4]))
+            file_e_list[id4].write('\n')
+        # for BP_idx, ph_tag in filtered_to_be_labled:
+        #     print('<%s %s   %s>' % (ph_tag, BP[BP_idx][0], BP[BP_idx][1], ), end='')
+        # print('\n')
 
 
-    with open('tag_phrase.pkl', 'wb') as f:
-        pickle.dump(tagged_phrase_result, f)
-    with open('sen_tag_phrase_info.pkl', 'wb') as f:
-        pickle.dump(sen_and_tagged_phrases, f)
+    # with open('tag_phrase.pkl', 'wb') as f:
+    #     pickle.dump(tagged_phrase_result, f)
+    # with open('sen_tag_phrase_info.pkl', 'wb') as f:
+    #     pickle.dump(sen_and_tagged_phrases, f)
 
     ph_cn = None
     for ph_cn in zip(*sen_and_tagged_phrases):
