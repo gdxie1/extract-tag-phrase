@@ -87,7 +87,27 @@ if __name__ == '__main__':
     senid = 0
     phrase_tag = ['NP', 'VP','ADJP', 'ADVP', 'CLP',  'CP',
                   'DNP', 'DP', 'DVP', 'FRAG', 'IP', 'LCP',
-                  'LST', 'NP', 'PP', 'PRN', 'QP', 'UCP', 'VP']
+                  'LST', 'PP', 'PRN', 'QP', 'UCP',]
+    #  tagged in vacabulary of the corpus
+    #    zh          en
+    # --------------------
+    #   <NP          < NP
+    #   <VP          < VP
+    #   <IP          < IP
+    #   <ADVP          < ADVP
+    #   <ADJP          < ADJP
+    #   <QP          < QP
+    #   <PP          < PP
+    #   <DNP          < DNP
+    #   <FRAG          < FRAG
+    #   <DP          < DP
+    #   <CP          < CP
+    #   <CLP          < CLP
+    #   <LCP          < LCP
+    #   <LST          < LST
+    #   <PRN          < PRN
+    #   <DVP          < DVP
+    #   <UCP          < UCP
 
     labled_phrase_number = 2  # each sentence has about 2 phrase labeled
     file_f = codecs.open(args.f_output, mode='w', encoding="utf-8")

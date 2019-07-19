@@ -86,10 +86,9 @@ if __name__ == '__main__':
     fe_phrases = get_giza_file_content(args.fe_file)
     ef_phrases = get_giza_file_content(args.ef_file)
 
-
     phrase_tag = ['NP', 'VP','ADJP', 'ADVP', 'CLP',  'CP',
                   'DNP', 'DP', 'DVP', 'FRAG', 'IP', 'LCP',
-                  'LST', 'NP', 'PP', 'PRN', 'QP', 'UCP', 'VP']
+                  'LST', 'PP', 'PRN', 'QP', 'UCP']
 
     labled_phrase_number = 5  # each sentence has about 2 phrase labeled
     tagged_phrase_result = []  # tagged phrases for all corpus
