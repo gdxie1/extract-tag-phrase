@@ -4,8 +4,7 @@
 import pickle
 import random
 import argparse
-from collections import Counter
-from phrase_extraction import phrase_extraction
+import re
 from alignment import get_alignments, do_alignment
 
 def get_data_from_file(file_name):
@@ -69,17 +68,17 @@ if __name__ == '__main__':
         line_id_file = open(line_id,  mode='rt', encoding='utf-8')
         for l_id, line_text in zip(line_id_file, ref_file):
             ori_text = file_sgm_list[l_id]
-            new_text = re.sub(r'<seg id="[0-9]+"> (.*)</seg>'
-                r"(?i)^.*interfaceOpDataFile.*$",
-           "interfaceOpDataFile %s" % fileIn,
-           line
-       )
-
+            new_text = re.sub(r'<seg id="[0-9]+"> (.*)</seg>', ori_text, line_text)
+            print(new_text)
+            file_sgm_list[l_id] = new_text
         ref_file.close()
         line_id_file.close()
 
-    file_e = open(args.e_output, mode='w', encoding="utf-8")
-    for fe_phrase, ef_phrase in zip(fe_phrases, ef_phrases):
+    file_e = open(args.output, mode='wt', encoding="utf-8")
+    for line in file_sgm_list:
+
+
+        :, ef_phrase in zip(fe_phrases, ef_phrases):
         print(senid)
         senid += 1
         # stopline = 1899
