@@ -35,17 +35,17 @@ def load_alignment(file_name):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
 
-    parser.add_argument("--ori_sgm", type=str)
-    parser.add_argument("--output", type=str)
+    parser.add_argument("--ori_sgm", type=str, required=True,)
+    parser.add_argument("--output", type=str, required=True,)
 
 
 
     # fe_phrases = get_giza_file_content(args.fe_file)
     # ef_phrases = get_giza_file_content(args.ef_file)
 
-    parser.add_argument("--tagged_refs", type=str, nargs="+",
+    parser.add_argument("--tagged_refs", type=str, nargs="+",required=True,
                         help="tagged plain references")
-    parser.add_argument("--line_id", type=str, nargs="+",
+    parser.add_argument("--line_id", type=str, nargs="+",required=True,
                         help="tagged refs's line id in sgm file")
 
     args = parser.parse_args()
@@ -66,7 +66,8 @@ if __name__ == '__main__':
     for ref, line_id in zip(args.tagged_refs, args.line_id):
         ref_file = open(ref, mode='rt', encoding='utf-8')
         line_id_file = open(line_id,  mode='rt', encoding='utf-8')
-        for l_id, line_text in zip(line_id_file, ref_file):
+        for id, line_text in zip(line_id_file, ref_file):
+            l_id = int(id)
             ori_text = file_sgm_list[l_id]
             new_text = re.sub(r'<seg id="[0-9]+"> (.*)</seg>', ori_text, line_text)
             print(new_text)
