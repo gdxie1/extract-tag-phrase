@@ -69,7 +69,7 @@ if __name__ == '__main__':
         for id, line_text in zip(line_id_file, ref_file):
             l_id = int(id)
             ori_text = file_sgm_list[l_id]
-            new_text = re.sub(r'<seg id="[0-9]+"> (.*)</seg>', ori_text, line_text)
+            new_text = re.sub(r'(<seg id="[0-9]+"> )(.*)(</seg>)', r'\0'+line_text + r'\2', ori_text)
             print(new_text)
             file_sgm_list[l_id] = new_text
         ref_file.close()
