@@ -76,23 +76,7 @@ if __name__ == '__main__':
 
     file_e = open(args.output, mode='wt', encoding="utf-8")
     for line in file_sgm_list:
-
-
-        :, ef_phrase in zip(fe_phrases, ef_phrases):
-        print(senid)
-        senid += 1
-        # stopline = 1899
-        # if senid != stopline:
-        #     continue
-        # senid = stopline
-        fe_alignment, ef_alignment = get_alignments(fe_phrase, ef_phrase)
-        # fe_phrase[0] 是 e 句子
-        f_sen = ' '.join(ef_phrase[0])
-        e_sen = ' '.join(fe_phrase[0])
-        file_f.write(f_sen)
-        file_f.write('\n')
-        file_e.write(e_sen)
+        file_e.write(line)
         file_e.write('\n')
-    file_f.close()
     file_e.close()
 
