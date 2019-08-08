@@ -81,7 +81,7 @@ if __name__ == '__main__':
 
             line_text = line_text[:-1]
             new_text = search_result.group(1) + line_text + search_result.group(3)
-            print(new_text)
+            #print(new_text)
             file_sgm_list[l_id] = new_text
         ref_file.close()
         line_id_file.close()
