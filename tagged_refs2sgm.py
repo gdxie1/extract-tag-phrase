@@ -36,17 +36,12 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
 
     parser.add_argument("--ori_sgm", type=str, required=True,)
-    parser.add_argument("--output", type=str, required=True,)
-
-
-
-    # fe_phrases = get_giza_file_content(args.fe_file)
-    # ef_phrases = get_giza_file_content(args.ef_file)
-
     parser.add_argument("--tagged_refs", type=str, nargs="+",required=True,
                         help="tagged plain references")
     parser.add_argument("--line_id", type=str, nargs="+",required=True,
                         help="tagged refs's line id in sgm file")
+
+    parser.add_argument("--output", type=str, required=True, )
 
     args = parser.parse_args()
     senid = 0
@@ -68,8 +63,24 @@ if __name__ == '__main__':
         line_id_file = open(line_id,  mode='rt', encoding='utf-8')
         for id, line_text in zip(line_id_file, ref_file):
             l_id = int(id)
+            # if l_id == 6458:
+            #     l_id = l_id
+            #     ori_text = file_sgm_list[l_id]
+            #     print(re.sub(r'(<seg id="[0-9]+"> )(.*)(</seg>)', r'group0 \0', ori_text))
+            #     print(re.sub(r'(<seg id="[0-9]+"> )(.*)(</seg>)', r'group1 \1', ori_text))
+            #     print(re.sub(r'(<seg id="[0-9]+"> )(.*)(</seg>)', r'group2 \2', ori_text))
+            #     print(re.sub(r'(<seg id="[0-9]+"> )(.*)(</seg>)', r'group3 \3', ori_text))
+
+
             ori_text = file_sgm_list[l_id]
-            new_text = re.sub(r'(<seg id="[0-9]+"> )(.*)(</seg>)', r'\0'+line_text + r'\2', ori_text)
+            search_result = re.search(r'(<seg id="?[0-9]+"?> ?)(.*)(</seg>)', ori_text)
+            # print(search_result.group(0))
+            # print(search_result.group(1))
+            # print(search_result.group(2))
+            # print(search_result.group(3))
+
+            line_text = line_text[:-1]
+            new_text = search_result.group(1) + line_text + search_result.group(3)
             print(new_text)
             file_sgm_list[l_id] = new_text
         ref_file.close()
@@ -78,6 +89,6 @@ if __name__ == '__main__':
     file_e = open(args.output, mode='wt', encoding="utf-8")
     for line in file_sgm_list:
         file_e.write(line)
-        file_e.write('\n')
+        # file_e.write('\n')
     file_e.close()
 
