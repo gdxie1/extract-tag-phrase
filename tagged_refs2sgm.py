@@ -71,8 +71,11 @@ if __name__ == '__main__':
             #     print(re.sub(r'(<seg id="[0-9]+"> )(.*)(</seg>)', r'group2 \2', ori_text))
             #     print(re.sub(r'(<seg id="[0-9]+"> )(.*)(</seg>)', r'group3 \3', ori_text))
 
+            try:
+                ori_text = file_sgm_list[l_id]
+            except IndexError:
+                print(l_id)
 
-            ori_text = file_sgm_list[l_id]
             search_result = re.search(r'(<seg id="?[0-9]+"?> ?)(.*)(</seg>)', ori_text)
             # print(search_result.group(0))
             # print(search_result.group(1))
