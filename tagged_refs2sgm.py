@@ -58,6 +58,7 @@ if __name__ == '__main__':
     file_sgm_list = []
     for line in file_sgm:
         file_sgm_list.append(line)
+    # print(len(file_sgm_list))
     for ref, line_id in zip(args.tagged_refs, args.line_id):
         ref_file = open(ref, mode='rt', encoding='utf-8')
         line_id_file = open(line_id,  mode='rt', encoding='utf-8')
@@ -71,10 +72,7 @@ if __name__ == '__main__':
             #     print(re.sub(r'(<seg id="[0-9]+"> )(.*)(</seg>)', r'group2 \2', ori_text))
             #     print(re.sub(r'(<seg id="[0-9]+"> )(.*)(</seg>)', r'group3 \3', ori_text))
 
-            try:
-                ori_text = file_sgm_list[l_id]
-            except IndexError:
-                print(l_id)
+            ori_text = file_sgm_list[l_id]
 
             search_result = re.search(r'(<seg id="?[0-9]+"?> ?)(.*)(</seg>)', ori_text)
             # print(search_result.group(0))
@@ -83,13 +81,14 @@ if __name__ == '__main__':
             # print(search_result.group(3))
 
             line_text = line_text[:-1]
-            new_text = search_result.group(1) + line_text + search_result.group(3)
+            new_text = search_result.group(1) + line_text + search_result.group(3) + '\n'
             #print(new_text)
             file_sgm_list[l_id] = new_text
         ref_file.close()
         line_id_file.close()
 
     file_e = open(args.output, mode='wt', encoding="utf-8")
+    print(len(file_sgm_list))
     for line in file_sgm_list:
         file_e.write(line)
         # file_e.write('\n')
