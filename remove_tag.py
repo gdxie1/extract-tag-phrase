@@ -1,11 +1,8 @@
 # coding=utf-8
 # chcp 65001
-# import csv
-import pickle
-import random
 import argparse
 import re
-from alignment import get_alignments, do_alignment
+import codecs
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
@@ -16,7 +13,7 @@ if __name__ == '__main__':
     args = parser.parse_args()
     #pattern = re.compile(r'(<[a-zA-Z]+) (\w+) ( > )')
     # read input file
-    file_input = open(args.input, mode='rt', encoding="utf-8")
+    file_input = codecs.open(args.input, mode='rt', encoding="utf-8")
     list_result = []
     for line in file_input:
         # print(line[:-1])
@@ -26,7 +23,7 @@ if __name__ == '__main__':
         new_line = re.sub(r'(<[a-zA-Z]+ )([^>]+)( >)', r'\2', line)
         print(new_line)
         list_result.append(new_line)
-    file_e = open(args.output, mode='wt', encoding="utf-8")
+    file_e = codecs.open(args.output, mode='wt', encoding="utf-8")
     print(len(list_result))
     for line in list_result:
         file_e.write(line)
