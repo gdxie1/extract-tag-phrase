@@ -21,7 +21,7 @@ if __name__ == '__main__':
         # for match in it:
         #     print(match.group())
         new_line = re.sub(r'(<[a-zA-Z]+ )([^>]+)( >)', r'\2', line)
-        print(new_line)
+        # print(new_line)
         list_result.append(new_line)
     file_e = codecs.open(args.output, mode='wt', encoding="utf-8")
     print(len(list_result))
