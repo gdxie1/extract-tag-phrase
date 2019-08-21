@@ -78,7 +78,7 @@ if __name__ == '__main__':
     f_input = codecs.open(args.input, 'rt', 'utf-8')
     for senid, line in enumerate(f_input):
         try:
-            p_parse_trees = list(parser.parse(parser.tokenize(f_sen)))
+            p_parse_trees = list(parser.parse(parser.tokenize(line)))
         except ValueError:
             print('parsing fail')
             exception_sen.append(senid)
