@@ -89,7 +89,7 @@ if __name__ == '__main__':
             exception_sen.append(senid)
             p_parse_trees = [Tree.fromstring('(S (NULL ERROR))')]  # we simply give a dummy tree
 
-        pickle.dump(tree_list, f_output)
+        pickle.dump(p_parse_trees, f_output)
         # str_tree = ' '.join(p_parse_trees)
         # f_output.write(str_tree)
         # f_output.write('\n')
