@@ -76,18 +76,25 @@ if __name__ == '__main__':
     tree_list = []
     p_phrase_trees = None
     f_input = codecs.open(args.input, 'rt', 'utf-8')
+    f_output = codecs.open(args.output, 'rt', 'utf-8')
     for senid, line in enumerate(f_input):
+        if senid > 10:
+            break
         try:
             p_parse_trees = list(parser.parse(parser.tokenize(line)))
         except ValueError:
             print('parsing fail')
             exception_sen.append(senid)
             p_parse_trees = [Tree.fromstring('(S (NULL ERROR))')]  # we simply give a dummy tree
-        tree_list.append(p_parse_trees)
+        str_tree = ' '.join(p_parse_trees)
+        f_output.write(str_tree)
+        f_output.write('\n')
+        # tree_list.append(p_parse_trees)
     f_input.close()
+    f_output.close()
 
-    with open(args.output, 'wb') as f:
-        pickle.dump(tree_list, f)
+    # with open(args.output, 'wb') as f:
+    #     pickle.dump(tree_list, f)
 
     print('exception sen:%r' % exception_sen)
     with codecs.open('tagged_info.txt', mode='w', encoding="utf-8") as f:
