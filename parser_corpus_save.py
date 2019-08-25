@@ -88,11 +88,10 @@ if __name__ == '__main__':
             print('parsing fail')
             exception_sen.append(senid)
             p_parse_trees = [Tree.fromstring('(S (NULL ERROR))')]  # we simply give a dummy tree
-
+        f_output.write('%d\n', len(p_parse_trees))
         for sub_tree in p_parse_trees:
             f_output.write(str(sub_tree))
-            f_output.write('|||')
-        f_output.write('\n')
+            f_output.write('\n|||\n')
         # str_tree = ' '.join(p_parse_trees)
         # f_output.write(str_tree)
         # f_output.write('\n')
