@@ -77,8 +77,8 @@ if __name__ == '__main__':
     p_phrase_trees = None
     f_input = codecs.open(args.input, 'rt', 'utf-8')
 
-    # f_output = codecs.open(args.output, 'rt', 'utf-8')
-    f_output = open(args.output, 'wb')
+    f_output = codecs.open(args.output, 'wt', 'utf-8')
+    # f_output = open(args.output, 'wt')
     for senid, line in enumerate(f_input):
         if senid > 10:
             break
@@ -89,7 +89,10 @@ if __name__ == '__main__':
             exception_sen.append(senid)
             p_parse_trees = [Tree.fromstring('(S (NULL ERROR))')]  # we simply give a dummy tree
 
-        pickle.dump(p_parse_trees, f_output)
+        for sub_tree in p_parse_trees:
+            f_output.write(str(sub_tree))
+            f_output.write('|||')
+        f_output.write('\n')
         # str_tree = ' '.join(p_parse_trees)
         # f_output.write(str_tree)
         # f_output.write('\n')
