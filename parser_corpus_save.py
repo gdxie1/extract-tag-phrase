@@ -1,5 +1,4 @@
 # coding=utf-8
-import codecs
 import argparse
 from nltk.parse import CoreNLPParser
 from nltk.tree import Tree
@@ -20,13 +19,14 @@ if __name__ == '__main__':
     exception_sen = []
     tree_list = []
     p_phrase_trees = None
-    f_input = open(args.input, mode='rt', encoding='utf-8')
+    f_input = open(args.input, mode='r', encoding='utf-8')
 
-    f_output = codecs.open(args.output, mode='wt', encoding='utf-8')
+    f_output = open(args.output, mode='w', encoding='utf-8')
     # f_output = open(args.output, 'wt')
     for senid, line in enumerate(f_input):
-        if senid > 100:
-            break
+        print(senid)
+        # if senid > 100:
+        #     break
         try:
             p_parse_trees = list(parser.parse(parser.tokenize(line)))
         except ValueError:

@@ -27,6 +27,8 @@ if __name__ == '__main__':
         if len(count_line) == 0:
             break
         count = int(count_line)
+        # if count == 2:
+        #     print(count)
         tree_list = []
         for i in range(count):
             tree_str = ''
