@@ -70,6 +70,8 @@ if __name__ == '__main__':
     parser.add_argument("e_output", type=str, help="tagged e result")
 
     parser.add_argument('tree_file', type=str, help="the parsed sentences, each sen corresponding a set tree")
+    parser.add_argument('tag_count', type=int, default=2, help="each sen's tag count")
+
     #parser.add_argument("parser_model_path", type=str)
 
     args = parser.parse_args()
@@ -104,7 +106,8 @@ if __name__ == '__main__':
     #   <DVP          < DVP
     #   <UCP          < UCP
 
-    labled_phrase_number = 2  # each sentence has about 2 phrase labeled
+    labled_phrase_number = args.tag_count  # each sentence has about 2 phrase labeled
+    print(labled_phrase_number)
     file_f = open(args.f_output, mode='w', encoding="utf-8")
     file_e = open(args.e_output, mode='w', encoding="utf-8")
     tree_file = open(args.tree_file, mode='rt', encoding="utf-8")
