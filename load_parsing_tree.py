@@ -19,13 +19,15 @@ if __name__ == '__main__':
     
     sen_tree_list = []
     p_phrase_trees = None
+    sen_count = 0
     f_input = open(args.input, mode='r', encoding='utf-8')
-
     f_output = open(args.output, mode='w', encoding='utf-8')
     while 1:
         count_line = f_input.readline()
         if len(count_line) == 0:
             break
+        sen_count += 1
+        print(sen_count)
         count = int(count_line)
         # if count == 2:
         #     print(count)
@@ -38,10 +40,10 @@ if __name__ == '__main__':
                     break
                 tree_str += line
             tree_list.append(Tree.fromstring(tree_str))
-        sen_tree_list.append(tree_list)
-    for sen_tree in sen_tree_list:
-        for sub_tree in sen_tree:
-            print(sub_tree)
+    #     sen_tree_list.append(tree_list)
+    # for sen_tree in sen_tree_list:
+        for sub_tree in tree_list:
+            # print(sub_tree)
             f_output.write(str(sub_tree))
             f_output.write('\n|||\n')
         # str_tree = ' '.join(p_parse_trees)
