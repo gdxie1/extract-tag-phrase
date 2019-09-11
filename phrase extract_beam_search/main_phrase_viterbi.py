@@ -1,6 +1,10 @@
 # coding=utf-8
 # chcp 65001
-#import csv
+"""
+add viterbi beam search method to extract phrases.
+first calculate the phrase probability then apply beam search
+the result show that this method is infeasible
+"""
 import pickle
 import codecs
 import argparse

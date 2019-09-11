@@ -1,4 +1,9 @@
-# coding=utf-8
+# coding=utf-
+"""
+a beam search approach using the phrase probability to search an optimistic phrase paris sequences for each
+sentence pair
+This method is infeasible
+"""
 from sortedcontainers import SortedListWithKey
 import math
 class Hypothesis:

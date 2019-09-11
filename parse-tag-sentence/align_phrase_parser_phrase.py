@@ -1,12 +1,24 @@
 # coding=utf-8
 # chcp 65001
+
+"""
+using stanford nlp parser to parse source sentence and find candidates phrases from parsed sentences
+then using the giza++'s alignment results to find corresponding phrases in target side
+then tagged the found phrase in both source side and target side
+"""
 # import csv
 import pickle
 import random
+import codecs
 import argparse
+from collections import Counter
 from phrase_extraction import phrase_extraction
 from alignment import get_alignments, do_alignment
+from nltk.parse import CoreNLPParser
 from nltk.tree import Tree
+
+from nltk.tag.stanford import StanfordPOSTagger
+
 
 def get_giza_file_content(file_name):
     file_content = get_data_from_file(file_name)
@@ -15,7 +27,7 @@ def get_giza_file_content(file_name):
 
 
 def get_data_from_file(file_name):
-    with open(file_name, mode='r', encoding="utf-8") as file_:
+    with codecs.open(file_name, encoding="utf-8") as file_:
         content = [line.lower().strip() for line in file_]
     # avoid to be segmented with the Record Seperator
     # content = []
@@ -44,7 +56,6 @@ def load_alignment(file_name):
 
     return alignment
 
-
 def traverse(t, ph_dict, ph_tag):
     try:
         tag = t.label()
@@ -55,27 +66,26 @@ def traverse(t, ph_dict, ph_tag):
     for subtree in t:
         if type(subtree) == Tree:
             traverse(subtree, ph_dict, ph_tag)
-
-
+ 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     # parser.add_argument("f_file", type=str)
     # parser.add_argument("e_file", type=str)
     # parser.add_argument("align", type=str)
-
+    
     parser.add_argument("fe_file", type=str, help="GIZA++'s result. e.g. zh_en.A3.final")
     parser.add_argument("ef_file", type=str, help="GIZA++'s result. e.g. zh_en.A3.final")
 
     parser.add_argument("f_output", type=str, help="tagged f result")
     parser.add_argument("e_output", type=str, help="tagged e result")
 
-    parser.add_argument('tree_file', type=str, help="the parsed sentences, each sen corresponding a set tree")
-    parser.add_argument('tag_count', type=int, default=2, help="each sen's tag count")
-
-    #parser.add_argument("parser_model_path", type=str)
+    parser.add_argument('start_line', type=int, default=0, help="start line number of the input")
+    parser.add_argument('end_line', type=int, default=-1, help="end line number of the input")
 
     args = parser.parse_args()
-
+    
+    parser = CoreNLPParser(url='http://localhost:9001')
+    print('parser generated!')
 
     fe_phrases = get_giza_file_content(args.fe_file)
     ef_phrases = get_giza_file_content(args.ef_file)
@@ -106,39 +116,41 @@ if __name__ == '__main__':
     #   <DVP          < DVP
     #   <UCP          < UCP
 
-    labled_phrase_number = args.tag_count  # each sentence has about 2 phrase labeled
-    print(labled_phrase_number)
-    file_f = open(args.f_output, mode='w', encoding="utf-8")
-    file_e = open(args.e_output, mode='w', encoding="utf-8")
-    tree_file = open(args.tree_file, mode='rt', encoding="utf-8")
+    labled_phrase_number = 2  # each sentence has about 2 phrase labeled
+    file_f = codecs.open(args.f_output, mode='w', encoding="utf-8")
+    file_e = codecs.open(args.e_output, mode='w', encoding="utf-8")
     tagged_phrase_result = []  # tagged phrases for all corpus
     # to do some statistic for future
     sen_and_tagged_phrases = []
     exception_sen = []
     for fe_phrase, ef_phrase in zip(fe_phrases, ef_phrases):
         print(senid)
-        senid += 1
-        count_line = tree_file.readline()
-        if len(count_line) == 0:
+        if senid < args.start_line:
+            senid += 1
+            print("skipped")
+            continue
+        if senid >= args.end_line and args.end_line != -1:
             break
 
-        count = int(count_line)
-        p_parse_trees = []
-        for i in range(count):
-            tree_str = ''
-            while 1:
-                line = tree_file.readline()
-                if line == '|||\n':
-                    break
-                tree_str += line
-            p_parse_trees.append(Tree.fromstring(tree_str))
-
+        senid += 1
+        # stopline = 1899
+        # if senid != stopline:
+        #     continue
+            # senid = stopline
         fe_alignment, ef_alignment = get_alignments(fe_phrase, ef_phrase)
         alignment = do_alignment(fe_alignment, ef_alignment,
                                  len(ef_phrase[0]), len(fe_phrase[0]))
-
+        # fe_phrase = fe_phrases[id]
+        # ef_phrase = ef_phrases[id]
         BP, BP_pos = phrase_extraction(fe_phrase[0], ef_phrase[0], alignment)  # fe_phrase[0] 是 e 句子
         f_sen = ' '.join(ef_phrase[0])
+
+        try:
+            p_parse_trees = list(parser.parse(parser.tokenize(f_sen)))
+        except ValueError:
+            print('parsing fail')
+            exception_sen.append(senid)
+            p_parse_trees = [Tree.fromstring('(S (NULL ERROR))')]  # we simply give a dummy tree
 
         # create a dict to keep all phrase in different categories
         p_phrase_dict = {} 
@@ -160,7 +172,7 @@ if __name__ == '__main__':
             ph_index = random.sample(range(len(p_phrase_list)), labled_phrase_number)
         else:
             ph_index = random.sample(range(len(p_phrase_list)), int(len(p_phrase_list)/2+0.5))  # at lease there is one
-
+        #align_ph_f = zip(*BP)[0]
         to_be_labeled = [] # (id in BP, tag type like NP BP etc)
         for idx in ph_index:
             for pair_i, ph_pair in enumerate(BP):
@@ -219,7 +231,7 @@ if __name__ == '__main__':
         #     print('<%s %s   %s>' % (ph_tag, BP[BP_idx][0], BP[BP_idx][1], ), end='')
         # print('\n')
 
-    tree_file.close()
+
     with open('tag_phrase.pkl', 'wb') as f:
         pickle.dump(tagged_phrase_result, f)
     with open('sen_tag_phrase_info.pkl', 'wb') as f:
@@ -236,7 +248,7 @@ if __name__ == '__main__':
     print('tags count:%d' % len(phrase_tag))
     print('tags:%r' % phrase_tag)
     print('exception sen:%r' % exception_sen)
-    with open('tagged_info.txt', mode='w', encoding="utf-8") as f:
+    with codecs.open('tagged_info.txt', mode='w', encoding="utf-8") as f:
         f.write('total tagged phrases:%d\n' % total_tagged_phrase)
         f.write('total sentences:%d\n' % len(sen_and_tagged_phrases))
         f.write('average tagged phrase:%f\n' % ave_tagged)

@@ -1,12 +1,15 @@
 # coding=utf-8
 # chcp 65001
 # import csv
-import pickle
-import random
+"""
+extract sentences form giza++'s *.A3.final file
+This file is used to verify the aligned result if all the sentences are aligned
+"""
+
 import argparse
-from collections import Counter
-from phrase_extraction import phrase_extraction
-from alignment import get_alignments, do_alignment
+
+from alignment import get_alignments
+
 
 def get_giza_file_content(file_name):
     file_content = get_data_from_file(file_name)
@@ -21,7 +24,7 @@ def get_data_from_file(file_name):
             # content.append(line.replace(chr(0x1E), '').lower().strip())
             content.append(line.replace('\x1e', '').strip())
 
-        # content = [line.lower().strip() for line in file_]
+    # content = [line.lower().strip() for line in file_]
     # avoid to be segmented with the Record Seperator
     # content = []
     # with codecs.open(file_name, encoding="utf-8") as file_:
@@ -49,12 +52,9 @@ def load_alignment(file_name):
 
     return alignment
 
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    # parser.add_argument("f_file", type=str)
-    # parser.add_argument("e_file", type=str)
-    # parser.add_argument("align", type=str)
-    
     parser.add_argument("fe_file", type=str)
     parser.add_argument("ef_file", type=str)
 
@@ -63,7 +63,6 @@ if __name__ == '__main__':
 
     parser.add_argument('--start_line', type=int, required=False, default=0)
     parser.add_argument('--end_line', type=int, required=False,  default=-1)  # -1 represents ends
-    #parser.add_argument("parser_model_path", type=str)
 
     args = parser.parse_args()
     

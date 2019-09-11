@@ -1,9 +1,10 @@
 # coding=utf-8
 # chcp 65001
-# import csv
-import pickle
+"""
+load parsed tree from files parsed in advance
+use this to verify the parse and store method in parser_corpus_save.py
+"""
 import argparse
-from collections import Counter
 from nltk.tree import Tree
 
 if __name__ == '__main__':

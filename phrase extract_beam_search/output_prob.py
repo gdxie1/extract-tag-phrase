@@ -1,13 +1,13 @@
 # coding=utf-8
 # chcp 65001
-# import csv
+"""
+to verify the output phrase probability file
+"""
 import pickle
 import codecs
 import argparse
-from collections import Counter
 from phrase_extraction import phrase_extraction
 from alignment import get_alignments, do_alignment
-import beam_search
 
 
 def get_giza_file_content(file_name):
