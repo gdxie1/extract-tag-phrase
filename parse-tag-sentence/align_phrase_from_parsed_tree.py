@@ -68,8 +68,8 @@ if __name__ == '__main__':
     # parser.add_argument("e_file", type=str)
     # parser.add_argument("align", type=str)
 
-    parser.add_argument("fe_file", type=str, help="GIZA++'s result. e.g. zh_en.A3.final")
-    parser.add_argument("ef_file", type=str, help="GIZA++'s result. e.g. zh_en.A3.final")
+    parser.add_argument("fe_file", type=str, help="GIZA++'s result. e.g. zh_en.A3.final  en is the target language")
+    parser.add_argument("ef_file", type=str, help="GIZA++'s result. e.g. en_zh.A3.final")
 
     parser.add_argument("f_output", type=str, help="tagged f result")
     parser.add_argument("e_output", type=str, help="tagged e result")
@@ -143,7 +143,14 @@ if __name__ == '__main__':
                                  len(ef_phrase[0]), len(fe_phrase[0]))
 
         BP, BP_pos = phrase_extraction(fe_phrase[0], ef_phrase[0], alignment)  # fe_phrase[0] 是 e 句子
-        f_sen = ' '.join(ef_phrase[0])
+
+        src_sen_words = ef_phrase[0]
+        sen_len = len(src_sen_words)
+        for i in range(sen_len):
+            for j in range(i+1, sen_len):
+                tree_pos = p_parse_trees.treeposition_spanning_leaves(i, j)
+
+        # f_sen = ' '.join(ef_phrase[0])
 
         # create a dict to keep all phrase in different categories
         p_phrase_dict = {} 

@@ -35,7 +35,7 @@ def phrase_extraction(f_sentence, e_sentence, alignment):
             # for phrase in extracted_phrases:
             #     BP.append(phrase)
 
-    return BP,BP_pos
+    return BP, BP_pos
 
 def is_aligned(A, f_ind, sentence, e_start, e_end):
     f_align = []

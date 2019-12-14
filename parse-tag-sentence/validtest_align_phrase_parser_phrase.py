@@ -71,6 +71,8 @@ if __name__ == '__main__':
     parser.add_argument("f_output", type=str)
     parser.add_argument("e_output", type=str)
 
+    parser.add_argument('tag_count', type=int, default=2, help="each sen's tag count")
+
     parser.add_argument('start_line', type=int, default=0)
     parser.add_argument('end_line', type=int, default=-1)  # -1 represents ends
     #parser.add_argument("parser_model_path", type=str)
@@ -90,7 +92,8 @@ if __name__ == '__main__':
                   'DNP', 'DP', 'DVP', 'FRAG', 'IP', 'LCP',
                   'LST', 'PP', 'PRN', 'QP', 'UCP']
 
-    labled_phrase_number = 5  # each sentence has about 2 phrase labeled
+    labled_phrase_number = args.tag_count
+    #labled_phrase_number = 5  # each sentence has about 2 phrase labeled
     tagged_phrase_result = []  # tagged phrases for all corpus
     # to do some statistic for future
     sen_and_tagged_phrases = []

@@ -1,5 +1,9 @@
 # coding=utf-8
 # chcp 65001
+"""
+This is the original script to extract phrase from *.A3.final
+https://github.com/maciejbiesek/smt-phrase-extraction
+"""
 import codecs
 import argparse
 from phrase_extraction import phrase_extraction

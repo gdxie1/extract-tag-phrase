@@ -1,5 +1,7 @@
 # coding=utf-8
-
+"""
+some functions that help use the giza++'s *A3.final to extract phrase
+"""
 import re
 from collections import defaultdict
 

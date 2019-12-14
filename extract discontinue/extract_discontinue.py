@@ -71,11 +71,13 @@ if __name__ == '__main__':
     parser.add_argument("fe_file", type=str, help="GIZA++'s result. e.g. zh_en.A3.final")
     parser.add_argument("ef_file", type=str, help="GIZA++'s result. e.g. zh_en.A3.final")
 
+    # parser.add_argument("--f_file", type=str, help="target sentence corpus")
+
+    parser.add_argument('--tree_file', type=str, help="the parsed sentences, each sen corresponding a set tree")
+
     parser.add_argument("f_output", type=str, help="tagged f result")
     parser.add_argument("e_output", type=str, help="tagged e result")
 
-    parser.add_argument('tree_file', type=str, help="the parsed sentences, each sen corresponding a set tree")
-    parser.add_argument('tag_count', type=int, default=2, help="each sen's tag count")
 
     #parser.add_argument("parser_model_path", type=str)
 
@@ -138,6 +140,7 @@ if __name__ == '__main__':
                 tree_str += line
             p_parse_trees.append(Tree.fromstring(tree_str))
 
+        # current, only cope 1 tree. the result shows that one sentence has only one tree
         fe_alignment, ef_alignment = get_alignments(fe_phrase, ef_phrase)
         alignment = do_alignment(fe_alignment, ef_alignment,
                                  len(ef_phrase[0]), len(fe_phrase[0]))
