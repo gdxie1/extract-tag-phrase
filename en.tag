@@ -1,1 +1,10 @@
 565w_cntt.txt
+<NP> bolivia /NP> holds <NP> presidential and parliament elections /NP>
+( afp , la paz , bolivia ) bolivia <VP> held its presidential and parliament elections /VP> today . with a higher than expected turn - out rate , voters hope the newly elected leadership can revitalize the economy , improve the people 's living standards and control the labor unrest in this poorest country in south america .
+the polling stations closed at 4 p.m . ( 4 a.m . on july 1 , taipei time ) . the polling staff said that the results of the elections will be released within <LCP> two hours /LCP> .
+earlier , the bolivian president and candidates in the elections , citing brazil 's championship at the world cup soccer tournament , encouraged the <NP> public /NP> to actively participate in the elections even though every bolivian who has reached the voting age is required by the federal law to vote .
+the <NP> bolivian president /NP> quiroga , whose term soon expires , said : " the brazilian team defeated the german team 2-0 in yokohama ; we the bolivians must defeat those who do not come out to vote . "
+30,000 soldiers and police on duty nationwide were ordered to ban sales of alcoholic drinks and mass gatherings on the election day . yet , as the news of the neighboring brazil winning the fifth championship at world cup soccer tournament reached <NP> here /NP> this morning , bolivians were equally overjoyed and indulged themselves in revelry , making the ban practically unenforceable by the soldiers and police .
+the organization of american states has sent <QP> 50 /QP> observers to monitor the <NP> fifth general election since bolivia restored its democratic rule /NP> .
+<NP> government officials /NP> said that the border <VP> has been closed /VP> so as to <VP> prevent any election frauds /VP> .
+eleven candidates from different political parties ran for the presidency . as it is estimated that nobody would <VP> obtain the absolute majority required to win the election /VP> , the authorities have planned to hold a run - off on <NP> august 4 /NP> .

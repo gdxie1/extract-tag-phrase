@@ -2,15 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0ba5dda7-bada-4ff8-8531-f34f1ac9a442" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/alignment.py" beforeDir="false" afterPath="$PROJECT_DIR$/alignment.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/extract discontinue/extract_discontinue.py" beforeDir="false" afterPath="$PROJECT_DIR$/extract discontinue/extract_discontinue.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/en.tag" beforeDir="false" afterPath="$PROJECT_DIR$/en.tag" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/parse-tag-sentence/align_phrase_from_parsed_tree.py" beforeDir="false" afterPath="$PROJECT_DIR$/parse-tag-sentence/align_phrase_from_parsed_tree.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/parse-tag-sentence/find_pp_parsing_tree.py" beforeDir="false" afterPath="$PROJECT_DIR$/parse-tag-sentence/find_pp_parsing_tree.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/parse-tag-sentence/validtest_align_phrase_parser_phrase.py" beforeDir="false" afterPath="$PROJECT_DIR$/parse-tag-sentence/validtest_align_phrase_parser_phrase.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/phrase_extraction.py" beforeDir="false" afterPath="$PROJECT_DIR$/phrase_extraction.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/extract_pair_from_line.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/extract_pair_from_line.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/extract_testset.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/extract_testset.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sen_tag_phrase_info.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/sen_tag_phrase_info.pkl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tag_phrase.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/tag_phrase.pkl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tagged_info.txt" beforeDir="false" afterPath="$PROJECT_DIR$/tagged_info.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/zh.tag" beforeDir="false" afterPath="$PROJECT_DIR$/zh.tag" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -27,14 +25,14 @@
     <SUITE FILE_PATH="coverage/smt_phrase_extraction$extract_test.coverage" NAME="extract_test Coverage Results" MODIFIED="1568144943882" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/smt_phrase_extraction$extract_pair_from_line.coverage" NAME="extract_pair_from_line Coverage Results" MODIFIED="1573726016973" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/scripts" />
     <SUITE FILE_PATH="coverage/smt_phrase_extraction$validtest_align_phrase_parser_phrase.coverage" NAME="validtest_align_phrase_parser_phrase Coverage Results" MODIFIED="1563211637711" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/smt_phrase_extraction$align_phrase_from_parsed_tree.coverage" NAME="align_phrase_from_parsed_tree Coverage Results" MODIFIED="1568215239222" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/smt_phrase_extraction$extract_testset.coverage" NAME="extract_testset Coverage Results" MODIFIED="1573759658690" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/scripts" />
+    <SUITE FILE_PATH="coverage/smt_phrase_extraction$align_phrase_from_parsed_tree.coverage" NAME="align_phrase_from_parsed_tree Coverage Results" MODIFIED="1580482552775" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/smt_phrase_extraction$align_sen_extract.coverage" NAME="align_sen_extract Coverage Results" MODIFIED="1568192388811" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/smt_phrase_extraction$main.coverage" NAME="main Coverage Results" MODIFIED="1558474204021" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/smt_phrase_extraction$load_parsing_tree.coverage" NAME="load_parsing_tree Coverage Results" MODIFIED="1566989678893" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/smt_phrase_extraction$find_pp_parsing_tree.coverage" NAME="find_pp_parsing_tree Coverage Results" MODIFIED="1568647258595" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/parse-tag-sentence" />
     <SUITE FILE_PATH="coverage/smt_phrase_extraction$output_prob.coverage" NAME="output_prob Coverage Results" MODIFIED="1561111596382" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/smt_phrase_extraction$align_phrase_parser_phrase.coverage" NAME="align_phrase_parser_phrase Coverage Results" MODIFIED="1568214921841" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/smt_phrase_extraction$align_phrase_parser_phrase.coverage" NAME="align_phrase_parser_phrase Coverage Results" MODIFIED="1580468157810" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/smt_phrase_extraction$remove_tag.coverage" NAME="remove_tag Coverage Results" MODIFIED="1565641473342" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/smt_phrase_extraction$tagged_refs2sgm_nist06.coverage" NAME="tagged_refs2sgm_nist06_src Coverage Results" MODIFIED="1565255588942" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/smt_phrase_extraction$tagged_refs2sgm_valid.coverage" NAME="tagged_refs2sgm_valid Coverage Results" MODIFIED="1565254840641" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
@@ -48,44 +46,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="align_phrase_from_parsed_tree.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/parse-tag-sentence/align_phrase_from_parsed_tree.py">
+      <file leaf-file-name="parser_corpus_save.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/parse-tag-sentence/parser_corpus_save.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2376">
-              <caret line="113" column="42" selection-start-line="113" selection-start-column="4" selection-end-line="113" selection-end-column="42" />
-              <folding>
-                <element signature="e#274#287#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="validtest_align_phrase_parser_phrase.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/parse-tag-sentence/validtest_align_phrase_parser_phrase.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="325">
-              <caret line="75" column="58" lean-forward="true" selection-start-line="75" selection-start-column="58" selection-end-line="75" selection-end-column="58" />
-              <folding>
-                <element signature="e#41#54#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="align_phrase_parser_phrase.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/parse-tag-sentence/align_phrase_parser_phrase.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2314">
-              <caret line="126" column="19" selection-start-line="126" selection-start-column="17" selection-end-line="126" selection-end-column="19" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="find_pp_parsing_tree.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/parse-tag-sentence/find_pp_parsing_tree.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1276">
-              <caret line="59" column="27" selection-start-line="59" selection-start-column="27" selection-end-line="59" selection-end-column="27" />
+            <state relative-caret-position="748">
+              <caret line="36" column="38" selection-start-line="36" selection-start-column="38" selection-end-line="36" selection-end-column="38" />
             </state>
           </provider>
         </entry>
@@ -93,44 +58,35 @@
       <file leaf-file-name="remove_tag.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/parse-tag-sentence/remove_tag.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="242">
-              <caret line="13" column="39" selection-end-line="32" />
+            <state relative-caret-position="374">
+              <caret line="19" column="16" selection-start-line="19" selection-start-column="16" selection-end-line="19" selection-end-column="16" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="extract_discontinue.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/extract discontinue/extract_discontinue.py">
+      <file leaf-file-name="align_phrase_from_parsed_tree.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/parse-tag-sentence/align_phrase_from_parsed_tree.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1408">
-              <caret line="69" selection-start-line="69" selection-end-line="69" />
-              <folding>
-                <element signature="e#274#287#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="196">
+              <caret line="172" selection-start-line="172" selection-end-line="172" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="extract_pair_from_line.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/extract_pair_from_line.py">
+      <file leaf-file-name="align_phrase_parser_phrase.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/parse-tag-sentence/align_phrase_parser_phrase.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="440">
-              <caret line="21" column="37" selection-end-line="56" />
-              <folding>
-                <element signature="e#16#31#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="2552">
+              <caret line="126" column="19" selection-start-line="126" selection-start-column="17" selection-end-line="126" selection-end-column="19" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="extract_testset.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/extract_testset.py">
+      <file leaf-file-name="tree.py" pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/anaconda3/lib/python3.7/site-packages/nltk/tree.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1606">
-              <caret line="74" column="31" selection-start-line="74" selection-start-column="31" selection-end-line="74" selection-end-column="31" />
-              <folding>
-                <element signature="e#16#31#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="9526">
+              <caret line="444" selection-start-line="444" selection-end-line="444" />
             </state>
           </provider>
         </entry>
@@ -195,12 +151,12 @@
         <option value="$PROJECT_DIR$/extract discontinue/extract_discontinue.py" />
         <option value="$PROJECT_DIR$/phrase_extraction.py" />
         <option value="$PROJECT_DIR$/parse-tag-sentence/t" />
-        <option value="$PROJECT_DIR$/parse-tag-sentence/align_phrase_from_parsed_tree.py" />
         <option value="$PROJECT_DIR$/parse-tag-sentence/find_pp_parsing_tree.py" />
         <option value="$PROJECT_DIR$/scripts/extract_pair_from_line.py" />
         <option value="$PROJECT_DIR$/scripts/extract_testset.py" />
         <option value="$PROJECT_DIR$/__init__.py" />
         <option value="$PROJECT_DIR$/parse-tag-sentence/validtest_align_phrase_parser_phrase.py" />
+        <option value="$PROJECT_DIR$/parse-tag-sentence/align_phrase_from_parsed_tree.py" />
       </list>
     </option>
   </component>
@@ -237,11 +193,6 @@
               <item name="smt-phrase-extraction" type="b2602c69:ProjectViewProjectNode" />
               <item name="smt-phrase-extraction" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="smt-phrase-extraction" type="b2602c69:ProjectViewProjectNode" />
-              <item name="smt-phrase-extraction" type="462c0819:PsiDirectoryNode" />
-              <item name="parse-tag-sentence" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -262,7 +213,7 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="PyConsoleOptionsProvider">
     <option name="myPythonConsoleState">
@@ -272,18 +223,18 @@
     </option>
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/parse-tag-sentence" />
-      <recent name="$PROJECT_DIR$" />
-      <recent name="$PROJECT_DIR$/phrase_table" />
-      <recent name="$PROJECT_DIR$/bak" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/extract discontinue" />
       <recent name="$PROJECT_DIR$/parse-tag-sentence" />
       <recent name="$PROJECT_DIR$/phrase extract_beam_search" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/phrase_table" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/parse-tag-sentence" />
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/phrase_table" />
+      <recent name="$PROJECT_DIR$/bak" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -298,7 +249,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.extract_testset">
+  <component name="RunManager" selected="Python.align_phrase_from_parsed_tree">
     <configuration name="align_phrase_from_parsed_tree" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="smt-phrase-extraction" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -624,10 +575,10 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.align_phrase_from_parsed_tree" />
         <item itemvalue="Python.extract_testset" />
         <item itemvalue="Python.extract_pair_from_line" />
         <item itemvalue="Python.find_pp_parsing_tree" />
-        <item itemvalue="Python.align_phrase_from_parsed_tree" />
         <item itemvalue="Python.extract_test" />
       </list>
     </recent_temporary>
@@ -660,27 +611,29 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1680" height="842" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.50357145" side_tool="true" visible="true" weight="0.30078125" />
+      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.15952381" side_tool="true" weight="0.27083334" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49642858" weight="0.30078125" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.64761907" weight="0.29427084" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.32859176" />
       <window_info anchor="bottom" id="Python Console" order="13" weight="0.3216146" />
       <window_info anchor="bottom" id="Terminal" order="10" weight="0.32859176" />
       <window_info anchor="right" id="Remote Host" order="3" weight="0.32967034" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49788135" visible="true" weight="0.20059524" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49788135" visible="true" weight="0.20059524" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="4" />
       <window_info anchor="right" id="SciView" order="5" />
       <window_info id="Structure" order="1" sideWeight="0.50130546" side_tool="true" weight="0.18383405" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49821427" weight="0.40364584" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.8404762" visible="true" weight="0.43359375" />
       <window_info id="Favorites" order="2" sideWeight="0.50211865" side_tool="true" weight="0.18383405" />
+      <window_info anchor="bottom" id="Anonymous Apex" order="12" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="Log Viewer" order="12" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="bottom" id="SOQL Query" order="12" />
       <window_info anchor="right" x="0" y="0" width="310" height="600" id="Documentation" order="6" side_tool="true" weight="0.3297568" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
@@ -735,7 +688,7 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="45" />
+      <option name="time" value="62" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="PythonConfigurationType">
@@ -767,7 +720,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/zh.tagged3" />
     <entry file="file://$PROJECT_DIR$/zh.tagged0" />
     <entry file="file://$PROJECT_DIR$/zh.tagged1" />
     <entry file="file://$PROJECT_DIR$/en.tagged1" />
@@ -780,13 +732,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1606">
           <caret line="77" column="31" selection-start-line="77" selection-start-column="31" selection-end-line="77" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/anaconda3/lib/python3.7/site-packages/nltk/tree.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="316">
-          <caret line="735" column="26" lean-forward="true" selection-start-line="735" selection-start-column="26" selection-end-line="735" selection-end-column="26" />
         </state>
       </provider>
     </entry>
@@ -806,18 +751,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/parse-tag-sentence/parser_corpus_save.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="748">
-          <caret line="36" column="38" selection-start-line="36" selection-start-column="38" selection-end-line="36" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/parse-tag-sentence/parser_phrase.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/en.tag" />
-    <entry file="file://$PROJECT_DIR$/zh.tag" />
     <entry file="file://$PROJECT_DIR$/en.src" />
     <entry file="file://$PROJECT_DIR$/zh.src" />
     <entry file="file://$PROJECT_DIR$/aligned_sen_extract.py">
@@ -912,20 +849,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/parse-tag-sentence/remove_tag.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="13" column="39" selection-end-line="32" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/extract discontinue/extract_discontinue.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1408">
           <caret line="69" selection-start-line="69" selection-end-line="69" />
-          <folding>
-            <element signature="e#274#287#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -935,9 +862,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="440">
           <caret line="21" column="37" selection-end-line="56" />
-          <folding>
-            <element signature="e#16#31#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -948,25 +872,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1606">
           <caret line="74" column="31" selection-start-line="74" selection-start-column="31" selection-end-line="74" selection-end-column="31" />
-          <folding>
-            <element signature="e#16#31#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/parse-tag-sentence/align_phrase_from_parsed_tree.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2376">
-          <caret line="113" column="42" selection-start-line="113" selection-start-column="4" selection-end-line="113" selection-end-column="42" />
-          <folding>
-            <element signature="e#274#287#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/__init__.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/__init__.py" />
     <entry file="file://$PROJECT_DIR$/phrase_extraction.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="264">
@@ -974,20 +883,49 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/parse-tag-sentence/validtest_align_phrase_parser_phrase.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="22">
+          <caret line="85" column="14" selection-start-line="85" selection-start-column="8" selection-end-line="85" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/parse-tag-sentence/parser_corpus_save.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="748">
+          <caret line="36" column="38" selection-start-line="36" selection-start-column="38" selection-end-line="36" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/parse-tag-sentence/replace_tag.py" />
+    <entry file="file://$PROJECT_DIR$/parse-tag-sentence/remove_tag.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="19" column="16" selection-start-line="19" selection-start-column="16" selection-end-line="19" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/anaconda3/lib/python3.7/site-packages/nltk/tree.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="9526">
+          <caret line="444" selection-start-line="444" selection-end-line="444" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/parse-tag-sentence/align_phrase_parser_phrase.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2314">
+        <state relative-caret-position="2552">
           <caret line="126" column="19" selection-start-line="126" selection-start-column="17" selection-end-line="126" selection-end-column="19" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/parse-tag-sentence/validtest_align_phrase_parser_phrase.py">
+    <entry file="file://$PROJECT_DIR$/zh.tag">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/parse-tag-sentence/align_phrase_from_parsed_tree.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="325">
-          <caret line="75" column="58" lean-forward="true" selection-start-line="75" selection-start-column="58" selection-end-line="75" selection-end-column="58" />
-          <folding>
-            <element signature="e#41#54#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="196">
+          <caret line="172" selection-start-line="172" selection-end-line="172" />
         </state>
       </provider>
     </entry>

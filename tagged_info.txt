@@ -1,6 +1,6 @@
-total tagged phrases:10
+total tagged phrases:14
 total sentences:10
-average tagged phrase:1.000000
+average tagged phrase:1.400000
 tags count:17
 tags:['NP', 'VP', 'ADJP', 'ADVP', 'CLP', 'CP', 'DNP', 'DP', 'DVP', 'FRAG', 'IP', 'LCP', 'LST', 'PP', 'PRN', 'QP', 'UCP']
 exception sen:[]

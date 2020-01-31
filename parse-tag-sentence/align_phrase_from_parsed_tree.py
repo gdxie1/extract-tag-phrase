@@ -133,6 +133,8 @@ if __name__ == '__main__':
             tree_str = ''
             while 1:
                 line = tree_file.readline()
+                line = line.replace('(PU ( )', '(PU [ )')
+                line = line.replace('(PU ))', '(PU ])')
                 if line == '|||\n':
                     break
                 tree_str += line
@@ -148,7 +150,7 @@ if __name__ == '__main__':
         sen_len = len(src_sen_words)
         for i in range(sen_len):
             for j in range(i+1, sen_len):
-                tree_pos = p_parse_trees.treeposition_spanning_leaves(i, j)
+                tree_pos = p_parse_trees[0].treeposition_spanning_leaves(i, j)
 
         # f_sen = ' '.join(ef_phrase[0])
 
