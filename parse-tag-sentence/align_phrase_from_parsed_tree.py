@@ -122,6 +122,9 @@ if __name__ == '__main__':
     exception_sen = []
     for fe_phrase, ef_phrase in zip(fe_phrases, ef_phrases):
         print(senid)
+        if senid == 28:
+            senid = 28
+
         senid += 1
         count_line = tree_file.readline()
         if len(count_line) == 0:
