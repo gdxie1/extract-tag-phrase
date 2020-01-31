@@ -133,6 +133,8 @@ if __name__ == '__main__':
             tree_str = ''
             while 1:
                 line = tree_file.readline()
+                # NLTK's tree may omit the round parenthesis, revised them
+                #  by replace the parenthesis to square brackets in the Tree before parse it
                 line = line.replace('(PU ( )', '(PU [ )')
                 line = line.replace('(PU ))', '(PU ])')
                 if line == '|||\n':

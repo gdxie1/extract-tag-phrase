@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0ba5dda7-bada-4ff8-8531-f34f1ac9a442" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/en.tag" beforeDir="false" afterPath="$PROJECT_DIR$/en.tag" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/parse-tag-sentence/align_phrase_from_parsed_tree.py" beforeDir="false" afterPath="$PROJECT_DIR$/parse-tag-sentence/align_phrase_from_parsed_tree.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sen_tag_phrase_info.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/sen_tag_phrase_info.pkl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tag_phrase.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/tag_phrase.pkl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tagged_info.txt" beforeDir="false" afterPath="$PROJECT_DIR$/tagged_info.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zh.tag" beforeDir="false" afterPath="$PROJECT_DIR$/zh.tag" afterDir="false" />
-    </list>
+    <list default="true" id="0ba5dda7-bada-4ff8-8531-f34f1ac9a442" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -67,8 +59,8 @@
       <file leaf-file-name="align_phrase_from_parsed_tree.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/parse-tag-sentence/align_phrase_from_parsed_tree.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="196">
-              <caret line="172" selection-start-line="172" selection-end-line="172" />
+            <state relative-caret-position="242">
+              <caret line="135" column="56" selection-start-line="135" selection-start-column="56" selection-end-line="135" selection-end-column="56" />
             </state>
           </provider>
         </entry>
@@ -611,6 +603,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1680" height="842" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.15952381" side_tool="true" weight="0.27083334" />
@@ -625,7 +618,7 @@
       <window_info anchor="right" id="Database" order="4" />
       <window_info anchor="right" id="SciView" order="5" />
       <window_info id="Structure" order="1" sideWeight="0.50130546" side_tool="true" weight="0.18383405" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.8404762" visible="true" weight="0.43359375" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.8404762" visible="true" weight="0.17317708" />
       <window_info id="Favorites" order="2" sideWeight="0.50211865" side_tool="true" weight="0.18383405" />
       <window_info anchor="bottom" id="Anonymous Apex" order="12" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -754,7 +747,6 @@
     <entry file="file://$PROJECT_DIR$/parse-tag-sentence/parser_phrase.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/en.tag" />
     <entry file="file://$PROJECT_DIR$/en.src" />
     <entry file="file://$PROJECT_DIR$/zh.src" />
     <entry file="file://$PROJECT_DIR$/aligned_sen_extract.py">
@@ -919,13 +911,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/en.tag">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/zh.tag">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/parse-tag-sentence/align_phrase_from_parsed_tree.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="196">
-          <caret line="172" selection-start-line="172" selection-end-line="172" />
+        <state relative-caret-position="242">
+          <caret line="135" column="56" selection-start-line="135" selection-start-column="56" selection-end-line="135" selection-end-column="56" />
         </state>
       </provider>
     </entry>
