@@ -121,29 +121,34 @@ if __name__ == '__main__':
     sen_and_tagged_phrases = []
     exception_sen = []
     for fe_phrase, ef_phrase in zip(fe_phrases, ef_phrases):
-        print(senid)
-        if senid == 28:
-            senid = 28
-
         senid += 1
+        print(senid)
         count_line = tree_file.readline()
         if len(count_line) == 0:
             break
 
         count = int(count_line)
         p_parse_trees = []
-        for i in range(count):
-            tree_str = ''
-            while 1:
-                line = tree_file.readline()
-                # NLTK's tree may omit the round parenthesis, revised them
-                #  by replace the parenthesis to square brackets in the Tree before parse it
-                line = line.replace('(PU ( )', '(PU [ )')
-                line = line.replace('(PU ))', '(PU ])')
-                if line == '|||\n':
-                    break
-                tree_str += line
-            p_parse_trees.append(Tree.fromstring(tree_str))
+
+        tree_str = ''
+        prev_line = None
+        while 1:
+            # in order to replace (PU \n ()\n,
+            # to ensure the replacement from the () to [) is correct. So to define the prev_line
+            line = tree_file.readline()
+            # NLTK's tree may omit the round parenthesis, revised them
+            #  by replace the parenthesis to square brackets in the Tree before parse it
+            line = line.lstrip()
+            if line == '( )\n' and prev_line == '(PU\n':
+                line = '[)\n'
+            line = line.replace('(PU ( )', '(PU [ )')
+            line = line.replace('(PU ))', '(PU ])')
+            line = line.replace('(NN ))', '(NN ])')
+            if line == '|||\n':
+                break
+            tree_str += line
+            prev_line = line
+        p_parse_trees.append(Tree.fromstring(tree_str))
 
         fe_alignment, ef_alignment = get_alignments(fe_phrase, ef_phrase)
         alignment = do_alignment(fe_alignment, ef_alignment,
@@ -151,13 +156,11 @@ if __name__ == '__main__':
 
         BP, BP_pos = phrase_extraction(fe_phrase[0], ef_phrase[0], alignment)  # fe_phrase[0] 是 e 句子
 
-        src_sen_words = ef_phrase[0]
-        sen_len = len(src_sen_words)
-        for i in range(sen_len):
-            for j in range(i+1, sen_len):
-                tree_pos = p_parse_trees[0].treeposition_spanning_leaves(i, j)
-
-        # f_sen = ' '.join(ef_phrase[0])
+        # src_sen_words = ef_phrase[0]
+        # sen_len = len(src_sen_words)
+        # for i in range(sen_len):
+        #     for j in range(i+1, sen_len):
+        #         tree_pos = p_parse_trees[0].treeposition_spanning_leaves(i, j)
 
         # create a dict to keep all phrase in different categories
         p_phrase_dict = {} 
@@ -175,25 +178,34 @@ if __name__ == '__main__':
                 p_phrase_list.append((' '.join(subtree.leaves()), key))
 
         # to select some phrases randomly
-        if labled_phrase_number < len(p_phrase_list):
-            ph_index = random.sample(range(len(p_phrase_list)), labled_phrase_number)
-        else:
-            ph_index = random.sample(range(len(p_phrase_list)), int(len(p_phrase_list)/2+0.5))  # at lease there is one
+        random.seed(30)
+        for it in range(10):  # to ensure generate enough to_be_labeled phrase
+            if labled_phrase_number < len(p_phrase_list):
+                ph_index = random.sample(range(len(p_phrase_list)), labled_phrase_number)
+            else:
+                ph_index = random.sample(range(len(p_phrase_list)), int(len(p_phrase_list)/2+0.5))  # at lease there is one
 
-        to_be_labeled = [] # (id in BP, tag type like NP BP etc)
-        for idx in ph_index:
-            for pair_i, ph_pair in enumerate(BP):
-                if p_phrase_list[idx][0] == ph_pair[0]:
-                    to_be_labeled.append((pair_i, p_phrase_list[idx][1]))
+            to_be_labeled = []  # (id in BP, tag type like NP BP etc)
+            for idx in ph_index:
+                phrase_zh = p_phrase_list[idx][0]
+                for pair_i, ph_pair in enumerate(BP):
+                    if phrase_zh == ph_pair[0]:
+                        to_be_labeled.append((pair_i, p_phrase_list[idx][1], phrase_zh))
+                        break
+            if len(to_be_labeled):
+                break
 
+        # if senid > 100000:
+        #     print('to be labeled: %d    randomly ph_index: %d' % (len(to_be_labeled), len(ph_index)))
+        #     print(to_be_labeled)
         filtered_to_be_labled = []  # (phrase id in BP, tags like np vp etc)
         # check if there is overlaps
-        for BP_idx, ph_tag in to_be_labeled:
+        for BP_idx, ph_tag, _ in to_be_labeled:
             overlap_flag = False
             f_start, f_end = BP_pos[BP_idx][0]
             for idx_fi, _ in filtered_to_be_labled:
                 f_start_fi, f_end_fi = BP_pos[idx_fi][0]
-                # 起始点 或结束点在另外一个 phrase内部 ,有以下几种情况，都有考虑
+                # 起始点 或结束点在另外一个 phrase内部 ,有以下几种情况，都要考虑
                 #  [        ]
                 #   [    ]   被比较的短语
                 #     [ ]
@@ -217,9 +229,9 @@ if __name__ == '__main__':
             f_st, f_end = BP_pos[BP_idx][0]
             e_st, e_end = BP_pos[BP_idx][1]
             f_wordlist_list[f_st].insert(0, '<'+ph_tag+'>')  # insert the <tag
-            f_wordlist_list[f_end-1].append('/'+ph_tag+'>')           # insert the />
+            f_wordlist_list[f_end-1].append('</'+ph_tag+'>')           # insert the />
             e_wordlist_list[e_st].insert(0, '<'+ph_tag+'>')  # insert the <tag
-            e_wordlist_list[e_end-1].append('/'+ph_tag+'>')           # insert the />
+            e_wordlist_list[e_end-1].append('</'+ph_tag+'>')           # insert the />
 
         f_wordlist = []
         e_wordlist = []

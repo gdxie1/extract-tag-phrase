@@ -168,6 +168,7 @@ if __name__ == '__main__':
                 for pair_i, ph_pair in enumerate(BP):
                     if p_phrase_list[idx][0] == ph_pair[0]:
                         to_be_labeled.append((pair_i, p_phrase_list[idx][1]))
+                        break
 
             filtered_to_be_labled = []  # (phrase id in BP, tags like np vp etc)
             # check if there is overlaps
@@ -213,8 +214,8 @@ if __name__ == '__main__':
         for k in filtered_key:
             BP_idx, ph_tag = f_ph_filted_dict[0][k]
             f_st, f_end = BP_pos_list[0][BP_idx][0]
-            f_wordlist_list[f_st].insert(0, '<'+ph_tag)  # insert the <tag
-            f_wordlist_list[f_end-1].append('>')           # insert the >
+            f_wordlist_list[f_st].insert(0, '<'+ph_tag+'>')  # insert the <tag
+            f_wordlist_list[f_end-1].append('</'+ph_tag+'>')    # insert the >
 
         e_sen_wordlist_output = []
         for ide in range(4):
@@ -223,8 +224,8 @@ if __name__ == '__main__':
             for k in filtered_key:
                 BP_idx, ph_tag = f_ph_filted_dict[ide][k]
                 e_st, e_end = BP_pos[BP_idx][1]
-                e_wordlist_list[e_st].insert(0, '<'+ph_tag)  # insert the <tag
-                e_wordlist_list[e_end-1].append('>')           # insert the >
+                e_wordlist_list[e_st].insert(0, '<'+ph_tag+'>')  # insert the <tag
+                e_wordlist_list[e_end-1].append('</'+ph_tag+'>')           # insert the >
             e_sen_wordlist_output.append(e_wordlist_list)
         #
         # for BP_idx, ph_tag in filtered_to_be_labled:

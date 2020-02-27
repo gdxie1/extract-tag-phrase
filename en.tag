@@ -1,10 +1,10 @@
-565w_cntt.txt
-<NP> bolivia /NP> holds <NP> presidential and parliament elections /NP>
-( afp , la paz , bolivia ) bolivia <VP> held its presidential and parliament elections /VP> today . with a higher than expected turn - out rate , voters hope the newly elected leadership can revitalize the economy , improve the people 's living standards and control the labor unrest in this poorest country in south america .
-the polling stations closed at 4 p.m . ( 4 a.m . on july 1 , taipei time ) . the polling staff said that the results of the elections will be released within <LCP> two hours /LCP> .
-earlier , the bolivian president and candidates in the elections , citing brazil 's championship at the world cup soccer tournament , encouraged the <NP> public /NP> to actively participate in the elections even though every bolivian who has reached the voting age is required by the federal law to vote .
-the <NP> bolivian president /NP> quiroga , whose term soon expires , said : " the brazilian team defeated the german team 2-0 in yokohama ; we the bolivians must defeat those who do not come out to vote . "
-30,000 soldiers and police on duty nationwide were ordered to ban sales of alcoholic drinks and mass gatherings on the election day . yet , as the news of the neighboring brazil winning the fifth championship at world cup soccer tournament reached <NP> here /NP> this morning , bolivians were equally overjoyed and indulged themselves in revelry , making the ban practically unenforceable by the soldiers and police .
-the organization of american states has sent <QP> 50 /QP> observers to monitor the <NP> fifth general election since bolivia restored its democratic rule /NP> .
-<NP> government officials /NP> said that the border <VP> has been closed /VP> so as to <VP> prevent any election frauds /VP> .
-eleven candidates from different political parties ran for the presidency . as it is estimated that nobody would <VP> obtain the absolute majority required to win the election /VP> , the authorities have planned to hold a run - off on <NP> august 4 /NP> .
+china should combine rule of law with rule by virtue in running the country , improve the socialist legal system and the administrative laws and statutes , raise the level of law enforcement by administrative authorities and cultivate a law @- abiding citizenry throughout the country .
+" <ADVP> firmly </ADVP> grasping the orientation of <ADJP> advanced </ADJP> <NP> culture </NP> , we should redouble our efforts to <VP> build up a socialist spiritual civilization </VP> .
+<ADVP> we should earnestly </ADVP> <VP> put the program for improving civic morality into practice and foster and promote a national spirit </VP> .
+" we should disseminate <NP> scientific knowledge </NP> , <VP> combat superstition </VP> , and promote a <ADJP> civil </ADJP> and <NP> healthy </NP> <NP> lifestyle </NP> .
+we should tirelessly fight against pornographic and illegal publications .
+<NP> development and management </NP> of internet websites should be strengthened , " it says .
+china should actively promote the <NP> reform and development </NP> of health and <DNP> sports undertakings </DNP> .
+<IP> fitness campaigns for the general public should be vigorously promoted , and the level of competitive sports raised even further . </IP>
+china <ADVP> should conscientiously </ADVP> do a good job in preparing for the 2008 <NP> olympic games in beijing </NP> and the 2010 <NP> world exposition </NP> in shanghai .
+" we <IP> must spare no effort in maintaining social stability . </IP>
